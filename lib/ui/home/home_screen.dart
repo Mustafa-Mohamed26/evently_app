@@ -9,11 +9,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryLight,
-        title: Text(AppLocalizations.of(context)!.language),
-        leading:Icon(Icons.arrow_back_ios),
-      ),
       body: ProfileTab(),
     );
   }
