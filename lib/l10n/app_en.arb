@@ -4,5 +4,7 @@
   "arabic": "Arabic",
   "theme": "Theme",
   "light": "Light",
-  "dark": "Dark"
+  "dark": "Dark",
+  "settings": "Settings",
+  "logout": "Logout"
 }
