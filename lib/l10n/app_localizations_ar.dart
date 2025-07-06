@@ -25,4 +25,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dark => 'ليلي';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get logout => 'تسجيل الخروج';
 }

@@ -2,8 +2,12 @@ import 'package:evently_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class AppStyles {
+  static TextStyle regular20white = GoogleFonts.inter(
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    color: AppColors.whiteColor,
+  );
   static TextStyle semi20Black = GoogleFonts.inter(
     fontSize: 20,
     fontWeight: FontWeight.w700,
@@ -64,5 +68,10 @@ class AppStyles {
     fontSize: 20,
     fontWeight: FontWeight.bold,
     color: AppColors.blackColor,
+  );
+  static TextStyle bold24White = GoogleFonts.inter(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: AppColors.whiteColor,
   );
 }
