@@ -1,4 +1,7 @@
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/ui/home/tabs/home_tab/home_tab.dart';
+import 'package:evently_app/ui/home/tabs/love_tab/love_tab.dart';
+import 'package:evently_app/ui/home/tabs/map_tab/map_tab.dart';
 import 'package:evently_app/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
@@ -14,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
-  List<Widget> tabs =[];
+  List<Widget> tabs = [HomeTab(), MapTab(), LoveTab(), ProfileTab()];
 
   BottomNavigationBarItem buildBottomNavigationBarItem({
     required String selectedIconName,
@@ -37,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
+      body: tabs[selectedIndex],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //TODO: Navigate to create event screen
