@@ -51,10 +51,10 @@ class _ThemeBottomSheetState extends State<ThemeBottomSheet> {
             },
             child: themeProvider.isDarkMode()
                 ? getSelectedLanguage(
-                    textTheme: AppLocalizations.of(context)!.dark,
+                    textTheme: AppLocalizations.of(context)!.profile_dark,
                   )
                 : getUnSelectedLanguage(
-                    textTheme: AppLocalizations.of(context)!.dark,
+                    textTheme: AppLocalizations.of(context)!.profile_dark,
                   ),
           ),
           SizedBox(height: height * 0.02),
@@ -66,10 +66,10 @@ class _ThemeBottomSheetState extends State<ThemeBottomSheet> {
             },
             child: !(themeProvider.isDarkMode())
                 ? getSelectedLanguage(
-                    textTheme: AppLocalizations.of(context)!.light,
+                    textTheme: AppLocalizations.of(context)!.profile_light,
                   )
                 : getUnSelectedLanguage(
-                    textTheme: AppLocalizations.of(context)!.light,
+                    textTheme: AppLocalizations.of(context)!.profile_light,
                   ),
           ),
         ],
