@@ -10,4 +10,7 @@ class AppAssets {
   static const String mapIcon = 'assets/images/Map.png';
   static const String profileChoiceIcon = 'assets/images/Profile_Choice.png';
   static const String profileIcon = 'assets/images/Profile.png';
+
+  // events cards
+  static const String birthdayImage = "assets/images/Birthday_Image.png";
 }

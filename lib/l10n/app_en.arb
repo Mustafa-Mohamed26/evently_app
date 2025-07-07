@@ -35,7 +35,7 @@
   "forgetPassword_title":"Forget Password",
   "forgetPassword_button":"Rest Password",
 
-  "home_welcome":"Welcome Back",
+  "home_welcome":"Welcome Back ✨",
   "home_all":"All",
   "home_sport":"Sport",
   "home_birthday":"Birthday",
@@ -53,5 +53,16 @@
   "home":"Home",
   "profile":"Profile",
   "love":"Love",
-  "map":"Map"
+  "map":"Map",
+
+  "category_all": "All",
+  "category_sport": "Sport",
+  "category_birthday": "Birthday",
+  "category_meeting": "Meeting",
+  "category_gaming": "Gaming",
+  "category_workshop": "Workshop",
+  "category_bookclub": "Book Club",
+  "category_exhibition": "Exhibition",
+  "category_holiday": "Holiday",
+  "category_eating": "Eating"
 }
