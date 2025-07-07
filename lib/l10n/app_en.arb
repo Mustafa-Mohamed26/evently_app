@@ -1,0 +1,68 @@
+{
+  "onboarding_1_title":"Personalize Your Experience",
+  "onboarding_1_content":"Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.",
+  "onboarding_1_language":"Language",
+  "onboarding_1_theme":"Theme",
+  "onboarding_1_button":"Let's Start",
+
+  "onboarding_2_title":"Find Events That Inspire You",
+  "onboarding_2_content":"Dive into a world of events crafted to fit your unique interests. Whether you're into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.",
+
+  "onboarding_3_title":"Effortless Event Planning",
+  "onboarding_3_content":"Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.",
+
+  "onboarding_4_title":"Connect with Friends & Share Moments",
+  "onboarding_4_content":"Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.",
+
+  "login_email":"Email",
+  "login_password": "Password",
+  "login_forget":"Forget Password",
+  "login_button":"Login",
+  "login_account":"Don't Have Account ?",
+  "login_create":"Cerate Account",
+  "login_or":"Or",
+  "login_google":"Login With Google",
+
+  "register_Title":"Register",
+  "register_name":"Name",
+  "register_email":"Email",
+  "register_password":"Password",
+  "register_rePassword":"Re Password",
+  "register_button":"Create Account",
+  "register_have":"Already Have Account",
+  "register_login":"Login",
+
+  "forgetPassword_title":"Forget Password",
+  "forgetPassword_button":"Rest Password",
+
+  "home_welcome":"Welcome Back ✨",
+  "home_all":"All",
+  "home_sport":"Sport",
+  "home_birthday":"Birthday",
+
+  "love_search":"Search for Event",
+
+  "profile_language":"Language",
+  "profile_english":"English",
+  "profile_arabic": "Arabic",
+  "profile_theme":"Theme",
+  "profile_light":"Light",
+  "profile_dark":"Dark",
+  "profile_logout":"Logout",
+
+  "home":"Home",
+  "profile":"Profile",
+  "love":"Love",
+  "map":"Map",
+
+  "category_all": "All",
+  "category_sport": "Sport",
+  "category_birthday": "Birthday",
+  "category_meeting": "Meeting",
+  "category_gaming": "Gaming",
+  "category_workshop": "Workshop",
+  "category_bookclub": "Book Club",
+  "category_exhibition": "Exhibition",
+  "category_holiday": "Holiday",
+  "category_eating": "Eating"
+}
