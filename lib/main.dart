@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       locale: Locale(appLanguageProvider.appLanguage),
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.homeRouteName,
-      routes: {AppRoutes.homeRouteName: (context) => const HomeScreen()},
+      routes: {AppRoutes.homeRouteName: (context) =>  HomeScreen()},
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: appThemeProvider.appTheme,

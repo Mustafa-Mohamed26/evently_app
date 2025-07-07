@@ -53,8 +53,8 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
               setState(() {});
             },
             child: languageProvider.appLanguage == 'en'
-                ? getSelectedLanguage(textLanguage: AppLocalizations.of(context)!.english)
-                : getUnSelectedLanguage(textLanguage: AppLocalizations.of(context)!.english),
+                ? getSelectedLanguage(textLanguage: AppLocalizations.of(context)!.profile_english)
+                : getUnSelectedLanguage(textLanguage: AppLocalizations.of(context)!.profile_english),
           ),
           SizedBox(height: height * 0.02),
           InkWell(
@@ -64,8 +64,8 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
               setState(() {});
             },
             child: languageProvider.appLanguage == 'ar'
-                ? getSelectedLanguage(textLanguage: AppLocalizations.of(context)!.arabic)
-                : getUnSelectedLanguage(textLanguage: AppLocalizations.of(context)!.arabic),
+                ? getSelectedLanguage(textLanguage: AppLocalizations.of(context)!.profile_arabic)
+                : getUnSelectedLanguage(textLanguage: AppLocalizations.of(context)!.profile_arabic),
           ),
         ],
       ),

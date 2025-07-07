@@ -98,53 +98,275 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
-  /// No description provided for @language.
+  /// No description provided for @onboarding_1_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalize Your Experience'**
+  String get onboarding_1_title;
+
+  /// No description provided for @onboarding_1_content.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.'**
+  String get onboarding_1_content;
+
+  /// No description provided for @onboarding_1_language.
   ///
   /// In en, this message translates to:
   /// **'Language'**
-  String get language;
+  String get onboarding_1_language;
 
-  /// No description provided for @english.
-  ///
-  /// In en, this message translates to:
-  /// **'English'**
-  String get english;
-
-  /// No description provided for @arabic.
-  ///
-  /// In en, this message translates to:
-  /// **'Arabic'**
-  String get arabic;
-
-  /// No description provided for @theme.
+  /// No description provided for @onboarding_1_theme.
   ///
   /// In en, this message translates to:
   /// **'Theme'**
-  String get theme;
+  String get onboarding_1_theme;
 
-  /// No description provided for @light.
+  /// No description provided for @onboarding_1_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s Start'**
+  String get onboarding_1_button;
+
+  /// No description provided for @onboarding_2_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Find Events That Inspire You'**
+  String get onboarding_2_title;
+
+  /// No description provided for @onboarding_2_content.
+  ///
+  /// In en, this message translates to:
+  /// **'Dive into a world of events crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.'**
+  String get onboarding_2_content;
+
+  /// No description provided for @onboarding_3_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Effortless Event Planning'**
+  String get onboarding_3_title;
+
+  /// No description provided for @onboarding_3_content.
+  ///
+  /// In en, this message translates to:
+  /// **'Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.'**
+  String get onboarding_3_content;
+
+  /// No description provided for @onboarding_4_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with Friends & Share Moments'**
+  String get onboarding_4_title;
+
+  /// No description provided for @onboarding_4_content.
+  ///
+  /// In en, this message translates to:
+  /// **'Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.'**
+  String get onboarding_4_content;
+
+  /// No description provided for @login_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get login_email;
+
+  /// No description provided for @login_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get login_password;
+
+  /// No description provided for @login_forget.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget Password'**
+  String get login_forget;
+
+  /// No description provided for @login_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login_button;
+
+  /// No description provided for @login_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t Have Account ?'**
+  String get login_account;
+
+  /// No description provided for @login_create.
+  ///
+  /// In en, this message translates to:
+  /// **'Cerate Account'**
+  String get login_create;
+
+  /// No description provided for @login_or.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get login_or;
+
+  /// No description provided for @login_google.
+  ///
+  /// In en, this message translates to:
+  /// **'Login With Google'**
+  String get login_google;
+
+  /// No description provided for @register_Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register_Title;
+
+  /// No description provided for @register_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get register_name;
+
+  /// No description provided for @register_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get register_email;
+
+  /// No description provided for @register_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get register_password;
+
+  /// No description provided for @register_rePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Re Password'**
+  String get register_rePassword;
+
+  /// No description provided for @register_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get register_button;
+
+  /// No description provided for @register_have.
+  ///
+  /// In en, this message translates to:
+  /// **'Already Have Account'**
+  String get register_have;
+
+  /// No description provided for @register_login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get register_login;
+
+  /// No description provided for @forgetPassword_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget Password'**
+  String get forgetPassword_title;
+
+  /// No description provided for @forgetPassword_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest Password'**
+  String get forgetPassword_button;
+
+  /// No description provided for @home_welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get home_welcome;
+
+  /// No description provided for @home_all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get home_all;
+
+  /// No description provided for @home_sport.
+  ///
+  /// In en, this message translates to:
+  /// **'Sport'**
+  String get home_sport;
+
+  /// No description provided for @home_birthday.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get home_birthday;
+
+  /// No description provided for @love_search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for Event'**
+  String get love_search;
+
+  /// No description provided for @profile_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get profile_language;
+
+  /// No description provided for @profile_english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get profile_english;
+
+  /// No description provided for @profile_arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get profile_arabic;
+
+  /// No description provided for @profile_theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get profile_theme;
+
+  /// No description provided for @profile_light.
   ///
   /// In en, this message translates to:
   /// **'Light'**
-  String get light;
+  String get profile_light;
 
-  /// No description provided for @dark.
+  /// No description provided for @profile_dark.
   ///
   /// In en, this message translates to:
   /// **'Dark'**
-  String get dark;
+  String get profile_dark;
 
-  /// No description provided for @settings.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings'**
-  String get settings;
-
-  /// No description provided for @logout.
+  /// No description provided for @profile_logout.
   ///
   /// In en, this message translates to:
   /// **'Logout'**
-  String get logout;
+  String get profile_logout;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @love.
+  ///
+  /// In en, this message translates to:
+  /// **'Love'**
+  String get love;
+
+  /// No description provided for @map.
+  ///
+  /// In en, this message translates to:
+  /// **'Map'**
+  String get map;
 }
 
 class _AppLocalizationsDelegate

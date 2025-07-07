@@ -48,7 +48,7 @@ class _ProfileTabState extends State<ProfileTab> {
           textDirection: TextDirection.ltr, // Force LTR direction
           child: Row(
             children: [
-              Image.asset(AppAssets.profile),
+              Image.asset(AppAssets.profileImage),
               Padding(
                 padding:  EdgeInsets.symmetric(horizontal: width * 0.04),
                 child: Column(
@@ -72,7 +72,7 @@ class _ProfileTabState extends State<ProfileTab> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.language,
+              AppLocalizations.of(context)!.profile_language,
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             Container(
@@ -94,8 +94,8 @@ class _ProfileTabState extends State<ProfileTab> {
                   children: [
                     Text(
                       languageProvider.appLanguage == 'en'
-                          ? AppLocalizations.of(context)!.english
-                          : AppLocalizations.of(context)!.arabic,
+                          ? AppLocalizations.of(context)!.profile_english
+                          : AppLocalizations.of(context)!.profile_arabic,
                       style: AppStyles.bold20Primary,
                     ),
 
@@ -110,7 +110,7 @@ class _ProfileTabState extends State<ProfileTab> {
             ),
             SizedBox(height: height * 0.02),
             Text(
-              AppLocalizations.of(context)!.theme,
+              AppLocalizations.of(context)!.profile_theme,
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             Container(
@@ -132,8 +132,8 @@ class _ProfileTabState extends State<ProfileTab> {
                   children: [
                     Text(
                       themeProvider.isDarkMode()
-                          ? AppLocalizations.of(context)!.dark
-                          : AppLocalizations.of(context)!.light,
+                          ? AppLocalizations.of(context)!.profile_dark
+                          : AppLocalizations.of(context)!.profile_light,
                       style: AppStyles.bold20Primary,
                     ),
 
@@ -164,7 +164,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   Icon(Icons.logout, color: AppColors.whiteColor, size: 30),
                   SizedBox(width: width * 0.02),
                   Text(
-                    AppLocalizations.of(context)!.logout,
+                    AppLocalizations.of(context)!.profile_logout,
                     style: AppStyles.regular20white,
                   ),
                 ],
