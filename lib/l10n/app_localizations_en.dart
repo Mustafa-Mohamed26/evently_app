@@ -100,7 +100,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgetPassword_button => 'Rest Password';
 
   @override
-  String get home_welcome => 'Welcome Back';
+  String get home_welcome => 'Welcome Back ✨';
 
   @override
   String get home_all => 'All';
@@ -146,4 +146,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get map => 'Map';
+
+  @override
+  String get category_all => 'All';
+
+  @override
+  String get category_sport => 'Sport';
+
+  @override
+  String get category_birthday => 'Birthday';
+
+  @override
+  String get category_meeting => 'Meeting';
+
+  @override
+  String get category_gaming => 'Gaming';
+
+  @override
+  String get category_workshop => 'Workshop';
+
+  @override
+  String get category_bookclub => 'Book Club';
+
+  @override
+  String get category_exhibition => 'Exhibition';
+
+  @override
+  String get category_holiday => 'Holiday';
+
+  @override
+  String get category_eating => 'Eating';
 }

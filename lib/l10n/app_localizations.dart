@@ -275,7 +275,7 @@ abstract class AppLocalizations {
   /// No description provided for @home_welcome.
   ///
   /// In en, this message translates to:
-  /// **'Welcome Back'**
+  /// **'Welcome Back ✨'**
   String get home_welcome;
 
   /// No description provided for @home_all.
@@ -367,6 +367,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Map'**
   String get map;
+
+  /// No description provided for @category_all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get category_all;
+
+  /// No description provided for @category_sport.
+  ///
+  /// In en, this message translates to:
+  /// **'Sport'**
+  String get category_sport;
+
+  /// No description provided for @category_birthday.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get category_birthday;
+
+  /// No description provided for @category_meeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Meeting'**
+  String get category_meeting;
+
+  /// No description provided for @category_gaming.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaming'**
+  String get category_gaming;
+
+  /// No description provided for @category_workshop.
+  ///
+  /// In en, this message translates to:
+  /// **'Workshop'**
+  String get category_workshop;
+
+  /// No description provided for @category_bookclub.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Club'**
+  String get category_bookclub;
+
+  /// No description provided for @category_exhibition.
+  ///
+  /// In en, this message translates to:
+  /// **'Exhibition'**
+  String get category_exhibition;
+
+  /// No description provided for @category_holiday.
+  ///
+  /// In en, this message translates to:
+  /// **'Holiday'**
+  String get category_holiday;
+
+  /// No description provided for @category_eating.
+  ///
+  /// In en, this message translates to:
+  /// **'Eating'**
+  String get category_eating;
 }
 
 class _AppLocalizationsDelegate

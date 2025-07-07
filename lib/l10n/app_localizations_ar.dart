@@ -100,7 +100,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get forgetPassword_button => 'إعادة تعيين كلمة المرور';
 
   @override
-  String get home_welcome => 'مرحباً بعودتك';
+  String get home_welcome => '✨ مرحباً بعودتك';
 
   @override
   String get home_all => 'الكل';
@@ -146,4 +146,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get map => 'الخريطة';
+
+  @override
+  String get category_all => 'الكل';
+
+  @override
+  String get category_sport => 'رياضة';
+
+  @override
+  String get category_birthday => 'عيد ميلاد';
+
+  @override
+  String get category_meeting => 'اجتماع';
+
+  @override
+  String get category_gaming => 'ألعاب';
+
+  @override
+  String get category_workshop => 'ورشة عمل';
+
+  @override
+  String get category_bookclub => 'نادي الكتاب';
+
+  @override
+  String get category_exhibition => 'معرض';
+
+  @override
+  String get category_holiday => 'عطلة';
+
+  @override
+  String get category_eating => 'تناول الطعام';
 }

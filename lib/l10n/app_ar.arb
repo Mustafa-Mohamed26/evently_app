@@ -35,7 +35,7 @@
   "forgetPassword_title": "نسيت كلمة المرور",
   "forgetPassword_button": "إعادة تعيين كلمة المرور",
 
-  "home_welcome": "مرحباً بعودتك",
+  "home_welcome": "✨ مرحباً بعودتك",
   "home_all": "الكل",
   "home_sport": "رياضة",
   "home_birthday": "عيد ميلاد",
@@ -53,6 +53,17 @@
   "home": "الرئيسية",
   "profile": "الحساب",
   "love": "المفضله",
-  "map": "الخريطة"
+  "map": "الخريطة",
+
+  "category_all": "الكل",
+  "category_sport": "رياضة",
+  "category_birthday": "عيد ميلاد",
+  "category_meeting": "اجتماع",
+  "category_gaming": "ألعاب",
+  "category_workshop": "ورشة عمل",
+  "category_bookclub": "نادي الكتاب",
+  "category_exhibition": "معرض",
+  "category_holiday": "عطلة",
+  "category_eating": "تناول الطعام"
   
 }
