@@ -89,4 +89,20 @@ class AppStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.whiteColor,
   );
+  static TextStyle medium20Primary = GoogleFonts.inter(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    color: AppColors.primaryLight,
+  );
+  static TextStyle medium20White = GoogleFonts.inter(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    color: AppColors.whiteColor,
+  );
+  static TextStyle medium16Black = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: AppColors.blackColor,
+    
+  );
 }

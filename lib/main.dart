@@ -1,6 +1,8 @@
 import 'package:evently_app/providers/app_language_provider.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
 import 'package:evently_app/ui/home/home_screen.dart';
+import 'package:evently_app/ui/onboarding/onboarding1_screen.dart';
+import 'package:evently_app/ui/onboarding/onboarding2_screen.dart';
 import 'package:evently_app/utils/app_routes.dart';
 import 'package:evently_app/utils/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +33,11 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(appLanguageProvider.appLanguage),
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeRouteName,
-      routes: {AppRoutes.homeRouteName: (context) =>  HomeScreen()},
+      initialRoute: AppRoutes.onboarding1RouteName,
+      routes: {
+        AppRoutes.onboarding1RouteName: (context) =>  Onboarding1Screen(),
+        AppRoutes.onboarding2RouteName: (context) =>  Onboarding2Screen(),
+        AppRoutes.homeRouteName: (context) =>  HomeScreen()},
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: appThemeProvider.appTheme,
