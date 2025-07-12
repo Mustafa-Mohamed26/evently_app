@@ -46,6 +46,18 @@ class AppLocalizationsAr extends AppLocalizations {
       'اجعل كل فعالية لا تُنسى بمشاركتها مع الآخرين. منصتنا تتيح لك دعوة الأصدقاء، وإبقائهم على اطلاع، والاحتفال سوياً. التقط اللحظات وشاركها مع شبكتك لتستعيد الذكريات الجميلة وتحتفظ بها.';
 
   @override
+  String get onboarding_back => 'السابق';
+
+  @override
+  String get onboarding_next => 'التالي';
+
+  @override
+  String get onboarding_skip => 'تخطي';
+
+  @override
+  String get onboarding_finish => 'انتهاء';
+
+  @override
   String get login_email => 'البريد الإلكتروني';
 
   @override

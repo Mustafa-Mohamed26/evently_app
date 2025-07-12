@@ -26,11 +26,10 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
   }
 
   Future<void> _completeOnboarding(BuildContext context) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // await prefs.setBool('seenOnboarding', true);
-
-    Navigator.popAndPushNamed(context, AppRoutes.homeRouteName);
-  }
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('seenOnboarding', true); // ✅ هذا أهم سطر
+  Navigator.pushReplacementNamed(context, AppRoutes.homeRouteName);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -96,17 +95,25 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
         ),
       ],
       onDone: () => _completeOnboarding(context),
-      onSkip: () =>
-          _completeOnboarding(context), // You can override onSkip callback
+      onSkip: () => _completeOnboarding(context),
       showSkipButton: false,
       skipOrBackFlex: 0,
       nextFlex: 0,
       showBackButton: true,
       //rtl: true, // Display as right-to-left
-      back: Text("Back", style: AppStyles.bold16Primary),
+      back: Text(
+        AppLocalizations.of(context)!.onboarding_back,
+        style: AppStyles.bold16Primary,
+      ),
       skip: const Text('Skip', style: TextStyle(fontWeight: FontWeight.w600)),
-      next: Text("Next", style: AppStyles.bold16Primary),
-      done: Text("Finish", style: AppStyles.bold16Primary),
+      next: Text(
+        AppLocalizations.of(context)!.onboarding_next,
+        style: AppStyles.bold16Primary,
+      ),
+      done: Text(
+        AppLocalizations.of(context)!.onboarding_finish,
+        style: AppStyles.bold16Primary,
+      ),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding: kIsWeb

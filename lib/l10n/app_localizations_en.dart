@@ -46,6 +46,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.';
 
   @override
+  String get onboarding_back => 'Back';
+
+  @override
+  String get onboarding_next => 'Next';
+
+  @override
+  String get onboarding_skip => 'Skip';
+
+  @override
+  String get onboarding_finish => 'Finish';
+
+  @override
   String get login_email => 'Email';
 
   @override

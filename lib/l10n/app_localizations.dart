@@ -164,6 +164,30 @@ abstract class AppLocalizations {
   /// **'Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.'**
   String get onboarding_4_content;
 
+  /// No description provided for @onboarding_back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get onboarding_back;
+
+  /// No description provided for @onboarding_next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboarding_next;
+
+  /// No description provided for @onboarding_skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboarding_skip;
+
+  /// No description provided for @onboarding_finish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get onboarding_finish;
+
   /// No description provided for @login_email.
   ///
   /// In en, this message translates to:

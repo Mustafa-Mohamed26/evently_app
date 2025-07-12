@@ -43,7 +43,7 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
             Text(
               AppLocalizations.of(context)!.onboarding_1_title,
               style: AppStyles.bold20Primary,
-              textAlign: TextAlign.left,
+              
             ),
             SizedBox(height: height * 0.02),
             Text(
