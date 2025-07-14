@@ -1,0 +1,71 @@
+import 'package:evently_app/utils/app_colors.dart';
+import 'package:evently_app/utils/app_styles.dart';
+import 'package:flutter/material.dart';
+
+typedef OnValidate = String? Function(String?);
+
+class CustomTextField extends StatelessWidget {
+  Color colorBorderSide;
+  Color? cursorColor;
+  String? hintText;
+  TextStyle? hintStyle;
+  String? labelText;
+  TextStyle? labelStyle;
+  Widget? prefixIcon;
+  Widget? suffixIcon;
+  TextEditingController controller;
+  OnValidate? validate;
+  TextInputType? keyboardType;
+  bool obscureText;
+  String ? obscuringCharacter;
+  CustomTextField({
+    super.key,
+    this.colorBorderSide = AppColors.greyColor,
+    this.cursorColor,
+    this.hintText,
+    this.hintStyle,
+    this.labelText,
+    this.labelStyle,
+    this.prefixIcon,
+    this.suffixIcon,
+    required this.controller,
+    this.validate,
+    this.keyboardType,
+    this.obscureText = false,
+    this.obscuringCharacter,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      decoration: InputDecoration(
+        enabledBorder: buildDecorationBorder(colorBorderSide: colorBorderSide),
+        focusedBorder: buildDecorationBorder(colorBorderSide: colorBorderSide),
+        errorBorder: buildDecorationBorder(colorBorderSide: AppColors.redColor),
+        focusedErrorBorder: buildDecorationBorder(
+          colorBorderSide: AppColors.redColor,
+        ),
+        hintText: hintText,
+        hintStyle: hintStyle ?? AppStyles.medium16Gray,
+        labelText: labelText,
+        labelStyle: labelStyle ?? AppStyles.medium16Gray,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        errorStyle: AppStyles.medium16Gray.copyWith(color: AppColors.redColor),
+      ),
+      cursorColor: cursorColor,
+      controller: controller,
+      validator: validate,
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+      obscuringCharacter: obscuringCharacter ?? ".",
+    );
+  }
+
+  OutlineInputBorder buildDecorationBorder({required Color colorBorderSide}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide(width: 1, color: colorBorderSide),
+    );
+  }
+}

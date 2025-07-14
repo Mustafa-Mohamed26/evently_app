@@ -73,7 +73,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_account => 'Don\'t Have Account ?';
 
   @override
-  String get login_create => 'Cerate Account';
+  String get login_create => 'Create Account';
 
   @override
   String get login_or => 'Or';

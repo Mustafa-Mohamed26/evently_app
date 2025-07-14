@@ -12,7 +12,7 @@ class AppTheme {
     ),
     primaryColor: AppColors.primaryLight,
     focusColor: AppColors.whiteColor,
-    appBarTheme: AppBarTheme(backgroundColor: AppColors.primaryLight),
+    appBarTheme: AppBarTheme(),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparentColor,
       elevation: 0,
@@ -42,7 +42,7 @@ class AppTheme {
     ),
     primaryColor: AppColors.primaryDark,
     focusColor: AppColors.primaryLight,
-    appBarTheme: AppBarTheme(backgroundColor: AppColors.primaryDark),
+    appBarTheme: AppBarTheme(),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparentColor,
       elevation: 0,
