@@ -34,6 +34,7 @@ class _HomeTabState extends State<HomeTab> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(30),
@@ -80,6 +81,7 @@ class _HomeTabState extends State<HomeTab> {
           ],
         ),
         bottom: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           toolbarHeight: height * 0.1,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(

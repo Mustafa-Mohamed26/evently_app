@@ -221,7 +221,7 @@ abstract class AppLocalizations {
   /// No description provided for @login_create.
   ///
   /// In en, this message translates to:
-  /// **'Cerate Account'**
+  /// **'Create Account'**
   String get login_create;
 
   /// No description provided for @login_or.

@@ -3,8 +3,10 @@ import 'package:evently_app/providers/app_language_provider.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
 import 'package:evently_app/ui/home/tabs/profile/language/language_bottom_sheet.dart';
 import 'package:evently_app/ui/home/tabs/profile/theme/theme_bottom_sheet.dart';
+import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
 import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
+import 'package:evently_app/utils/app_routes.dart';
 import 'package:evently_app/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +52,7 @@ class _ProfileTabState extends State<ProfileTab> {
             children: [
               Image.asset(AppAssets.profileImage),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: width * 0.04),
+                padding: EdgeInsets.symmetric(horizontal: width * 0.04),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -69,7 +71,7 @@ class _ProfileTabState extends State<ProfileTab> {
           vertical: height * 0.04,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               AppLocalizations.of(context)!.profile_language,
@@ -147,27 +149,22 @@ class _ProfileTabState extends State<ProfileTab> {
               ),
             ),
             Spacer(),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.redColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+            CustomElevatedButton(
+              onPressed: () {
+                //TODO: Navigate to login
+                Navigator.pushReplacementNamed(context, AppRoutes.loginRouteName);
+              },
+              text: AppLocalizations.of(context)!.profile_logout,
+              textStyle: AppStyles.regular20white,
+              backgroundColor: AppColors.redColor,
+              hasIcon: true,
+              iconWidget: Padding(
+                padding:  EdgeInsets.only(left: width * 0.04),
+                child: Icon(
+                  Icons.logout,
+                  color: AppColors.whiteColor,
+                  size: 30,
                 ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: width * 0.04,
-                  vertical: height * 0.02,
-                ),
-              ),
-              onPressed: () {},
-              child: Row(
-                children: [
-                  Icon(Icons.logout, color: AppColors.whiteColor, size: 30),
-                  SizedBox(width: width * 0.02),
-                  Text(
-                    AppLocalizations.of(context)!.profile_logout,
-                    style: AppStyles.regular20white,
-                  ),
-                ],
               ),
             ),
           ],
