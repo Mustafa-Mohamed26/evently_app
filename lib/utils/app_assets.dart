@@ -13,6 +13,14 @@ class AppAssets {
 
   // events cards
   static const String birthdayImage = "assets/images/Birthday_Image.png";
+  static const String bookClubImage = "assets/images/BookClub_image.png";
+  static const String eatingImage = 'assets/images/Eating_image.png';
+  static const String exhibitionImage = 'assets/images/Exhibition_image.png';
+  static const String gamingImage = 'assets/images/Gaming_image.png';
+  static const String holidayImage = 'assets/images/Holiday_image.png';
+  static const String meetingImage = 'assets/images/Meeting_image.png';
+  static const String sportImage = 'assets/images/Sport_image.png';
+  static const String workshopImage = 'assets/images/Workshop_image.png';
 
   // onboarding screen
   static const String appLogoOnboarding =

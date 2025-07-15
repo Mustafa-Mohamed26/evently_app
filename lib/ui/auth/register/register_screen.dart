@@ -48,6 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.whiteBgColor,
+        iconTheme: IconThemeData(color: AppColors.blackColor),
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.register_Title,
