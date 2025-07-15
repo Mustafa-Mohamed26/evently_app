@@ -34,6 +34,7 @@ class _HomeTabState extends State<HomeTab> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(30),
@@ -80,6 +81,7 @@ class _HomeTabState extends State<HomeTab> {
           ],
         ),
         bottom: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           toolbarHeight: height * 0.1,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -111,6 +113,14 @@ class _HomeTabState extends State<HomeTab> {
                   },
                   tabs: eventsNameList.map((eventName) {
                     return EventTabItem(
+                      unSelectedTextStyle: Theme.of(
+                        context,
+                      ).textTheme.headlineSmall,
+                      selectedTextStyle: Theme.of(
+                        context,
+                      ).textTheme.headlineMedium,
+
+                      selectedBgColor: Theme.of(context).focusColor,
                       isSelected:
                           selectedIndex == eventsNameList.indexOf(eventName),
                       eventName: eventName,
