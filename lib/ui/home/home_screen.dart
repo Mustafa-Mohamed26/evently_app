@@ -5,6 +5,7 @@ import 'package:evently_app/ui/home/tabs/map_tab/map_tab.dart';
 import 'package:evently_app/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
+import 'package:evently_app/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: tabs[selectedIndex],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //TODO: Navigate to create event screen
+          Navigator.of(context).pushNamed(AppRoutes.addEventRouteName);
         },
         child: Icon(Icons.add, color: AppColors.whiteColor, size: 35),
       ),

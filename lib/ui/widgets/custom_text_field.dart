@@ -18,6 +18,7 @@ class CustomTextField extends StatelessWidget {
   TextInputType? keyboardType;
   bool obscureText;
   String ? obscuringCharacter;
+  int? maxLines;
   CustomTextField({
     super.key,
     this.colorBorderSide = AppColors.greyColor,
@@ -33,11 +34,13 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.obscuringCharacter,
+    this.maxLines,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines ?? 1,
       decoration: InputDecoration(
         enabledBorder: buildDecorationBorder(colorBorderSide: colorBorderSide),
         focusedBorder: buildDecorationBorder(colorBorderSide: colorBorderSide),

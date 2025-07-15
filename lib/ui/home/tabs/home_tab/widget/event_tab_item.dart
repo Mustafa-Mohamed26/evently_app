@@ -7,7 +7,19 @@ import 'package:flutter/material.dart';
 class EventTabItem extends StatelessWidget {
   bool isSelected;
   String eventName;
-  EventTabItem({super.key, required this.isSelected, required this.eventName});
+  Color selectedBgColor;
+  TextStyle? selectedTextStyle;
+  TextStyle? unSelectedTextStyle;
+  Color? borderColor;
+  EventTabItem({
+    super.key,
+    required this.isSelected,
+    required this.eventName,
+    required this.selectedBgColor,
+    required this.selectedTextStyle,
+    required this.unSelectedTextStyle,
+    this.borderColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +27,21 @@ class EventTabItem extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: width * 0.02),
-      padding: EdgeInsets.symmetric(horizontal: width * 0.02, vertical: height * 0.002),
+      padding: EdgeInsets.symmetric(
+        horizontal: width * 0.02,
+        vertical: height * 0.006,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(46),
-        border: Border.all(color: Theme.of(context).focusColor, width: 2),
-        color: isSelected
-            ? Theme.of(context).focusColor
-            : AppColors.transparentColor,
+        border: Border.all(
+          color: borderColor ?? Theme.of(context).focusColor,
+          width: 2,
+        ),
+        color: isSelected ? selectedBgColor : AppColors.transparentColor,
       ),
       child: Text(
         eventName,
-        style: isSelected
-            ? Theme.of(context).textTheme.headlineMedium
-            : Theme.of(context).textTheme.headlineSmall,
+        style: isSelected ? selectedTextStyle : unSelectedTextStyle,
       ),
     );
   }

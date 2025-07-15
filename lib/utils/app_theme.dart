@@ -9,10 +9,15 @@ class AppTheme {
       headlineLarge: AppStyles.bold20Black,
       headlineMedium: AppStyles.medium16Primary,
       headlineSmall: AppStyles.medium16White,
+      titleLarge: AppStyles.medium16Black,
+      titleMedium: AppStyles.medium16Gray,
     ),
     primaryColor: AppColors.primaryLight,
     focusColor: AppColors.whiteColor,
-    appBarTheme: AppBarTheme(),
+    dividerColor: AppColors.greyColor,
+    appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(color: AppColors.primaryLight),
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparentColor,
       elevation: 0,
@@ -39,10 +44,16 @@ class AppTheme {
       headlineLarge: AppStyles.bold20White,
       headlineMedium: AppStyles.medium16White,
       headlineSmall: AppStyles.medium16White,
+      titleLarge: AppStyles.medium16White,
+      titleMedium: AppStyles.medium16White,
     ),
     primaryColor: AppColors.primaryDark,
     focusColor: AppColors.primaryLight,
-    appBarTheme: AppBarTheme(),
+    dividerColor: AppColors.whiteColor,
+
+    appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(color: AppColors.primaryDark),
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparentColor,
       elevation: 0,
