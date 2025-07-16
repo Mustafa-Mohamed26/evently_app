@@ -44,6 +44,7 @@ dependencies:
   introduction_screen: ^3.1.17
   flutter_switch: ^0.3.2
   iconify_flutter: ^0.0.7
+  firebase_core: ^3.15.1
 
 dev_dependencies:
   flutter_test:
