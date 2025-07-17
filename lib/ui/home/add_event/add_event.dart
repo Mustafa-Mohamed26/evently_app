@@ -34,6 +34,7 @@ class _AddEventState extends State<AddEvent> {
   TimeOfDay? selectedTime;
   String formateTime = '';
   late EventListProvider eventListProvider;
+  bool isSubmitted = false;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +116,11 @@ class _AddEventState extends State<AddEvent> {
     }
 
     void addEvent() {
-      if (formKey.currentState!.validate() == true) {
+      isSubmitted = true;
+      setState(() {});
+      if (formKey.currentState!.validate() == true &&
+          selectedDate != null &&
+          selectedTime != null) {
         //TODO: add event to firebase fireStore database and navigate to home
         Event event = Event(
           title: titleController.text,
@@ -258,6 +263,15 @@ class _AddEventState extends State<AddEvent> {
                           : formateDate, //'${selectedDate!.month}/${selectedDate!.day}/${selectedDate!.year}', //TODO: Localization
                       onChooseDateOrTimeClick: chooseDate,
                     ),
+                    Visibility(
+                      visible: selectedDate == null && isSubmitted == true,
+                      child: Text(
+                        "Please Choose Date",
+                        style: AppStyles.medium16Black.copyWith(
+                          color: AppColors.redColor,
+                        ),
+                      ),
+                    ),
                     DateOrTimeWidget(
                       iconDateOrTime: Icons.timelapse_rounded,
                       eventDateOrTime: "Event Time", //TODO: Localization
@@ -265,6 +279,16 @@ class _AddEventState extends State<AddEvent> {
                           ? "Choose Time" //TODO: Localization
                           : formateTime,
                       onChooseDateOrTimeClick: chooseTime,
+                    ),
+                    Visibility(
+                      visible: selectedTime == null && isSubmitted == true,
+
+                      child: Text(
+                        "Please Choose Time",
+                        style: AppStyles.medium16Black.copyWith(
+                          color: AppColors.redColor,
+                        ),
+                      ),
                     ),
                     SizedBox(height: height * 0.02),
                     Text(
