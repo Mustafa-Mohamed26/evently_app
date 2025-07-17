@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AppLanguageProvider extends ChangeNotifier{
-  //TODO: the data and mothods will be added
-  String appLanguage = "en";
+class AppLanguageProvider extends ChangeNotifier {
+  String appLanguage = "en"; 
 
-  //TODO: change the language
-  void changeLanguage(String newLanguage){
-    if(newLanguage == appLanguage){
-      return;
+  AppLanguageProvider() {
+    _loadLanguageFromPrefs();
+  }
+
+  Future<void> _loadLanguageFromPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedLang = prefs.getString('languageCode');
+    if (savedLang != null) {
+      appLanguage = savedLang;
+      notifyListeners();
     }
-    //TODO: appLanguage => defult => current language
-    //TODO: newLamguage => selected language
+  }
+
+  Future<void> _saveLanguageToPrefs(String langCode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('languageCode', langCode);
+  }
+
+  void changeLanguage(String newLanguage) {
+    if (newLanguage == appLanguage) return;
+
     appLanguage = newLanguage;
-    //TODO: notify the listeners
-    notifyListeners();
+    _saveLanguageToPrefs(newLanguage); 
+    notifyListeners(); 
   }
 }
