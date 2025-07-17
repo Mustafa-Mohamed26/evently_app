@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/models/event.dart';
+import 'package:evently_app/providers/event_list_provider.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_item.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_tab_item.dart';
 import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_styles.dart';
+import 'package:evently_app/utils/firebase_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -15,10 +20,17 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   int selectedIndex = 0;
+
+  
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var eventListProvider = Provider.of<EventListProvider>(context);
+    if(eventListProvider.eventList.isEmpty){
+      eventListProvider.getAllEvents();
+    }
     List<String> eventsNameList = [
       AppLocalizations.of(context)!.category_all,
       AppLocalizations.of(context)!.category_sport,
@@ -138,12 +150,12 @@ class _HomeTabState extends State<HomeTab> {
             child: ListView.separated(
               padding: EdgeInsets.only(top: height * 0.02),
               itemBuilder: (context, index) {
-                return EventItem();
+                return EventItem(event:  eventListProvider.eventList[index]);
               },
               separatorBuilder: (context, index) {
                 return SizedBox(height: height * 0.02);
               },
-              itemCount: 20,
+              itemCount: eventListProvider.eventList.length,
             ),
           ),
         ],

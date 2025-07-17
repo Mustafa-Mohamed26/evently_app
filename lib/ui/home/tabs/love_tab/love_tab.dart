@@ -37,7 +37,7 @@ class LoveTab extends StatelessWidget {
             child: ListView.separated(
               padding: EdgeInsets.only(top: height * 0.02),
               itemBuilder: (context, index) {
-                return EventItem();
+                return Container();
               },
               separatorBuilder: (context, index) {
                 return SizedBox(height: height * 0.02);

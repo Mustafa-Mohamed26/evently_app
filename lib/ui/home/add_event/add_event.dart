@@ -1,6 +1,7 @@
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/event.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
+import 'package:evently_app/providers/event_list_provider.dart';
 import 'package:evently_app/ui/home/add_event/widgets/date_or_time_widget.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_tab_item.dart';
 import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
@@ -9,6 +10,7 @@ import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_styles.dart';
 import 'package:evently_app/utils/firebase_utils.dart';
+import 'package:evently_app/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +33,7 @@ class _AddEventState extends State<AddEvent> {
   String formateDate = '';
   TimeOfDay? selectedTime;
   String formateTime = '';
+  late EventListProvider eventListProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -73,12 +76,13 @@ class _AddEventState extends State<AddEvent> {
       AppLocalizations.of(context)!.category_eating: AppAssets.eatingImage,
     };
 
-    selectedEventImage = eventsNameList[selectedIndex];
+    selectedEventImage = eventsImageList[selectedIndex];
     selectedEventName = eventsNameList[selectedIndex];
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     var ThemeProvider = Provider.of<AppThemeProvider>(context);
+    eventListProvider = Provider.of<EventListProvider>(context);
 
     //TODO: handle the ui of the date and time picker in dark mode and light mode
     //TODO: handle the localization of the date and time picker in dark mode and light mode
@@ -121,12 +125,19 @@ class _AddEventState extends State<AddEvent> {
           eventDataTime: selectedDate!,
           eventTime: formateDate,
         );
-        FirebaseUtils.addEventToFireStore(event).timeout(Duration(microseconds: 500), onTimeout: (){
-          //TODO: alert dialog, toast, snack bar
-          print("Event added successfully");
-          Navigator.pop(context);
-        });
-
+        FirebaseUtils.addEventToFireStore(event).timeout(
+          Duration(microseconds: 500),
+          onTimeout: () {
+            ToastUtils.toastMsg(
+              msg: "Event added Successfully",
+              backGroundColor: AppColors.primaryLight,
+              textColor: AppColors.whiteColor,
+            );
+            // get all events => refresh
+            eventListProvider.getAllEvents();
+            Navigator.pop(context);
+          },
+        );
       }
     }
 
