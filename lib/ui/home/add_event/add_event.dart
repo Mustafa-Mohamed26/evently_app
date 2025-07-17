@@ -1,4 +1,5 @@
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/models/event.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
 import 'package:evently_app/ui/home/add_event/widgets/date_or_time_widget.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_tab_item.dart';
@@ -7,6 +8,7 @@ import 'package:evently_app/ui/widgets/custom_text_field.dart';
 import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_styles.dart';
+import 'package:evently_app/utils/firebase_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -111,6 +113,20 @@ class _AddEventState extends State<AddEvent> {
     void addEvent() {
       if (formKey.currentState!.validate() == true) {
         //TODO: add event to firebase fireStore database and navigate to home
+        Event event = Event(
+          title: titleController.text,
+          description: descriptionController.text,
+          eventImage: selectedEventImage,
+          eventName: selectedEventName,
+          eventDataTime: selectedDate!,
+          eventTime: formateDate,
+        );
+        FirebaseUtils.addEventToFireStore(event).timeout(Duration(microseconds: 500), onTimeout: (){
+          //TODO: alert dialog, toast, snack bar
+          print("Event added successfully");
+          Navigator.pop(context);
+        });
+
       }
     }
 
@@ -222,6 +238,7 @@ class _AddEventState extends State<AddEvent> {
                       hintText: "Event Description", //TODO: Localization
                     ),
                     SizedBox(height: height * 0.02),
+                    //TODO: add validation to the time and data
                     DateOrTimeWidget(
                       iconDateOrTime: Icons.calendar_month_outlined,
                       eventDateOrTime: "Event Date", //TODO: Localization
@@ -234,7 +251,7 @@ class _AddEventState extends State<AddEvent> {
                       iconDateOrTime: Icons.timelapse_rounded,
                       eventDateOrTime: "Event Time", //TODO: Localization
                       chooseDateOrTime: selectedTime == null
-                          ? "Choose Time"  //TODO: Localization
+                          ? "Choose Time" //TODO: Localization
                           : formateTime,
                       onChooseDateOrTimeClick: chooseTime,
                     ),
