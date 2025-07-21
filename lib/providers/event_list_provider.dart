@@ -97,7 +97,7 @@ class EventListProvider extends ChangeNotifier {
     selectedIndex == 0 ? getAllEvents() : getFilteredEvents();
 
     getAllFavoriteEvent();
-    
+
     notifyListeners();
   }
 
@@ -111,6 +111,18 @@ class EventListProvider extends ChangeNotifier {
       return event.isFavorite == true;
     }).toList();
 
+    notifyListeners();
+  }
+
+  void getAllFavoriteEventFromFireStore() async {
+    var querySnapshot = await FirebaseUtils.getEventsCollection()
+        .orderBy('event_data_time', descending: false)
+        .where('is_favorite', isEqualTo: true)
+        .get();
+
+    querySnapshot.docs.map((doc) {
+      return doc.data();
+    }).toList();
     notifyListeners();
   }
 

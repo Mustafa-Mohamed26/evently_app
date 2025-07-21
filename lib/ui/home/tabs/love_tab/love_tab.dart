@@ -26,7 +26,8 @@ class _LoveTabState extends State<LoveTab> {
     super.initState();
     // WidgetBinging is used to call the function after the widget is built
     WidgetsBinding.instance.addPostFrameCallback((_){
-      eventListProvider.getAllFavoriteEvent();
+      //eventListProvider.getAllFavoriteEvent();
+      eventListProvider.getAllFavoriteEventFromFireStore();
     });
   }
 

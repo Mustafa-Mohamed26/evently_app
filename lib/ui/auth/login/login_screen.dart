@@ -5,10 +5,11 @@ import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_routes.dart';
 import 'package:evently_app/utils/app_styles.dart';
+import 'package:evently_app/utils/dialog_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-
   LoginScreen({super.key});
 
   @override
@@ -16,9 +17,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController(text: 'mYlOo@example.com');
+  TextEditingController emailController = TextEditingController(
+    text: 'jdoe@ex.com',
+  );
 
-  TextEditingController passwordController = TextEditingController(text: '12345678');
+  TextEditingController passwordController = TextEditingController(
+    text: '123456',
+  );
 
   var formKey = GlobalKey<FormState>();
 
@@ -124,7 +129,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context).pushNamed(AppRoutes.registerRouteName);
+                              Navigator.of(
+                                context,
+                              ).pushNamed(AppRoutes.registerRouteName);
                             },
                             child: Text(
                               AppLocalizations.of(context)!.login_create,
@@ -185,10 +192,62 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void login() {
+  void login() async {
     if (formKey.currentState!.validate() == true) {
       //TODO: login
-      Navigator.pushReplacementNamed(context, AppRoutes.homeRouteName);
+      DialogUtils.showLoading(context: context, loadingText: 'Loading...');
+      try {
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(
+          context: context,
+          message: 'Login success',
+          title: 'Success',
+          posActionName: 'OK',
+          posAction: () => Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRoutes.homeRouteName,
+            (_) => false,
+          ),
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          //print('No user found for that email.');
+        } else if (e.code == 'wrong-password') {
+          //print('Wrong password provided for that user.');
+        } else if (e.code == 'invalid-credential') {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(
+            context: context,
+            message:
+                'The supplied auth credential is incorrect, malformed or has expired.',
+            title: 'Error',
+            posActionName: 'OK',
+            posAction: () => Navigator.pop(context),
+          );
+        } else if (e.code == 'network-request-failed') {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(
+            context: context,
+            message: 'No internet connection',
+            title: 'Error',
+            posActionName: 'OK',
+            posAction: () => Navigator.pop(context),
+          );
+        }
+      } catch (e) {
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(
+          context: context,
+          message: e.toString(),
+          title: 'Error',
+          posActionName: 'OK',
+        );
+      }
     }
   }
 }

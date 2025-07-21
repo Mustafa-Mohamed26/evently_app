@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: showOnboarding
           ? AppRoutes.onboarding1RouteName
-          : AppRoutes.homeRouteName,
+          : AppRoutes.loginRouteName,
       routes: {
         AppRoutes.onboarding1RouteName: (context) => Onboarding1Screen(),
         AppRoutes.onboarding2RouteName: (context) => Onboarding2Screen(),
