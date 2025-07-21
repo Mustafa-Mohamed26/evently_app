@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/event.dart';
+import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/firebase_utils.dart';
+import 'package:evently_app/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
 
 class EventListProvider extends ChangeNotifier {
   List<Event> eventList = [];
   List<Event> filteredEventList = [];
   List<String> eventsNameList = [];
+  List<Event> favoriteEventList = [];
   int selectedIndex = 0;
 
   List<String> getEventsNameList(BuildContext context) {
@@ -74,6 +77,40 @@ class EventListProvider extends ChangeNotifier {
     filteredEventList = querySnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
+    notifyListeners();
+  }
+
+  void updateIsFavorite(Event event) {
+    FirebaseUtils.getEventsCollection()
+        .doc(event.id)
+        .update({'is_favorite': !event.isFavorite})
+        .timeout(
+          Duration(microseconds: 500),
+          onTimeout: () {
+            ToastUtils.toastMsg(
+              msg: 'Event updated successfully',
+              backGroundColor: AppColors.greenColor,
+              textColor: AppColors.whiteColor,
+            );
+          },
+        );
+    selectedIndex == 0 ? getAllEvents() : getFilteredEvents();
+
+    getAllFavoriteEvent();
+    
+    notifyListeners();
+  }
+
+  void getAllFavoriteEvent() async {
+    var querySnapshot = await FirebaseUtils.getEventsCollection().get();
+    eventList = querySnapshot.docs.map((doc) {
+      return doc.data();
+    }).toList();
+
+    favoriteEventList = eventList.where((event) {
+      return event.isFavorite == true;
+    }).toList();
+
     notifyListeners();
   }
 
