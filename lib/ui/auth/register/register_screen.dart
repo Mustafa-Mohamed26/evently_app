@@ -5,6 +5,8 @@ import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_routes.dart';
 import 'package:evently_app/utils/app_styles.dart';
+import 'package:evently_app/utils/dialog_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -30,14 +32,62 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  void register() {
+  void register() async {
     if (formKey.currentState!.validate()) {
-      //TODO: register logic
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        AppRoutes.homeRouteName,
-        (route) => false,
-      );
+     
+      DialogUtils.showLoading(context: context, loadingText: 'Loading...');
+      try {
+        final credential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(
+          context: context,
+          message: 'Registration success',
+          title: 'Success',
+          posActionName: 'OK',
+          posAction: () => Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRoutes.homeRouteName,
+            (_) => false,
+          ),
+        );
+        print('register success');
+        print('id: ${credential.user!.uid}');
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+           DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(
+            context: context,
+            message:
+                'The account already exists for that email. Please login',
+            title: 'Error',
+            posActionName: 'OK',
+            posAction: () => Navigator.pop(context),
+          );
+        } else if (e.code == 'network-request-failed') {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(
+            context: context,
+            message: 'No internet connection',
+            title: 'Error',
+            posActionName: 'OK',
+            posAction: () => Navigator.pop(context),
+          );
+        }
+      } catch (e) {
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(
+          context: context,
+          message: e.toString(),
+          title: 'Error',
+          posActionName: 'OK',
+        );
+      }
     }
   }
 
