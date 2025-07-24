@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/event.dart';
 import 'package:evently_app/providers/event_list_provider.dart';
+import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_item.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_tab_item.dart';
 import 'package:evently_app/utils/app_colors.dart';
@@ -24,10 +25,12 @@ class _HomeTabState extends State<HomeTab> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var eventListProvider = Provider.of<EventListProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
     eventListProvider.getEventsNameList(context);
     if (eventListProvider.eventList.isEmpty) {
-      eventListProvider.getAllEvents();
+      eventListProvider.getAllEvents(userProvider.currentUser!.id);
     }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -47,7 +50,7 @@ class _HomeTabState extends State<HomeTab> {
                   AppLocalizations.of(context)!.home_welcome,
                   style: AppStyles.regular14white,
                 ),
-                Text("Name Surname", style: AppStyles.bold24White),
+                Text(userProvider.currentUser!.name, style: AppStyles.bold24White),
               ],
             ),
             Spacer(),
@@ -105,7 +108,7 @@ class _HomeTabState extends State<HomeTab> {
                   indicatorColor: AppColors.transparentColor,
                   dividerColor: AppColors.transparentColor,
                   onTap: (index) {
-                    eventListProvider.changeSelectedIndex(index);
+                    eventListProvider.changeSelectedIndex(index, userProvider.currentUser!.id);
                     setState(() {});
                   },
                   tabs: eventListProvider.eventsNameList.map((eventName) {

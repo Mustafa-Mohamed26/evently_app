@@ -1,4 +1,6 @@
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/providers/event_list_provider.dart';
+import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
 import 'package:evently_app/ui/widgets/custom_text_field.dart';
 import 'package:evently_app/utils/app_assets.dart';
@@ -6,8 +8,10 @@ import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_routes.dart';
 import 'package:evently_app/utils/app_styles.dart';
 import 'package:evently_app/utils/dialog_utils.dart';
+import 'package:evently_app/utils/firebase_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -195,13 +199,29 @@ class _LoginScreenState extends State<LoginScreen> {
   void login() async {
     if (formKey.currentState!.validate() == true) {
       //TODO: login
+      //TODO: show loading
       DialogUtils.showLoading(context: context, loadingText: 'Loading...');
       try {
+        //TODO: sign in firebase auth
         final credential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(
               email: emailController.text,
               password: passwordController.text,
             );
+        //TODO: read user from fireStore
+        var user = await FirebaseUtils.readUserFromFireStore(credential.user?.uid??'');
+        if(user == null){
+          return;
+        }
+        //TODO: save user in provder
+        
+        var userProvider = Provider.of<UserProvider>(context, listen: false); // provider only once
+        userProvider.updateUser(user);
+
+        var eventListProvider = Provider.of<EventListProvider>(context, listen: false); // provider only once
+        eventListProvider.changeSelectedIndex(0, userProvider.currentUser!.id);
+        eventListProvider.getAllFavoriteEventFromFireStore(userProvider.currentUser!.id);
+
         DialogUtils.hideLoading(context: context);
         DialogUtils.showMessage(
           context: context,
