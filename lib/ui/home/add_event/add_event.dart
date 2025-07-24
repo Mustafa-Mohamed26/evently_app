@@ -2,6 +2,7 @@ import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/event.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
 import 'package:evently_app/providers/event_list_provider.dart';
+import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/home/add_event/widgets/date_or_time_widget.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_tab_item.dart';
 import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
@@ -130,21 +131,32 @@ class _AddEventState extends State<AddEvent> {
           eventDataTime: selectedDate!,
           eventTime: formateDate,
         );
-        FirebaseUtils.addEventToFireStore(event).timeout(
-          Duration(microseconds: 500),
-          onTimeout: () {
-            ToastUtils.toastMsg(
-              msg: "Event added Successfully",
-              backGroundColor: AppColors.primaryLight,
-              textColor: AppColors.whiteColor,
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        FirebaseUtils.addEventToFireStore(event, userProvider.currentUser!.id)
+            .then((value) {
+              ToastUtils.toastMsg(
+                msg: "Event added Successfully",
+                backGroundColor: AppColors.primaryLight,
+                textColor: AppColors.whiteColor,
+              );
+              // get all events => refresh
+              eventListProvider.getAllEvents(userProvider.currentUser!.id);
+            })
+            .timeout(
+              Duration(microseconds: 500),
+              onTimeout: () {
+                ToastUtils.toastMsg(
+                  msg: "Event added Successfully",
+                  backGroundColor: AppColors.primaryLight,
+                  textColor: AppColors.whiteColor,
+                );
+                // get all events => refresh
+                eventListProvider.getAllEvents(userProvider.currentUser!.id);
+                Navigator.pop(context);
+              },
             );
-            // get all events => refresh
-            eventListProvider.getAllEvents();
-            Navigator.pop(context);
-          },
-        );
-      }
     }
+      }
 
     return Scaffold(
       appBar: AppBar(

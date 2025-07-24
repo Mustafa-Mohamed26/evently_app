@@ -1,5 +1,6 @@
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/event_list_provider.dart';
+import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_item.dart';
 import 'package:evently_app/ui/widgets/custom_text_field.dart';
 import 'package:evently_app/utils/app_colors.dart';
@@ -19,6 +20,7 @@ class LoveTab extends StatefulWidget {
 class _LoveTabState extends State<LoveTab> {
   TextEditingController searchController = TextEditingController();
   late EventListProvider eventListProvider;
+  late UserProvider userProvider;
 
   @override
   void initState() {
@@ -27,7 +29,7 @@ class _LoveTabState extends State<LoveTab> {
     // WidgetBinging is used to call the function after the widget is built
     WidgetsBinding.instance.addPostFrameCallback((_){
       //eventListProvider.getAllFavoriteEvent();
-      eventListProvider.getAllFavoriteEventFromFireStore();
+      eventListProvider.getAllFavoriteEventFromFireStore(userProvider.currentUser!.id);
     });
   }
 
@@ -36,6 +38,7 @@ class _LoveTabState extends State<LoveTab> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     eventListProvider = Provider.of<EventListProvider>(context);
+    userProvider = Provider.of<UserProvider>(context);
     return SafeArea(
       child: Column(
         children: [

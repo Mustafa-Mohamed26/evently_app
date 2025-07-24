@@ -1,6 +1,8 @@
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/app_language_provider.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
+import 'package:evently_app/providers/event_list_provider.dart';
+import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/home/tabs/profile/language/language_bottom_sheet.dart';
 import 'package:evently_app/ui/home/tabs/profile/theme/theme_bottom_sheet.dart';
 import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
@@ -39,6 +41,8 @@ class _ProfileTabState extends State<ProfileTab> {
     var width = MediaQuery.of(context).size.width;
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
+    var eventListProvider = Provider.of<EventListProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryLight,
@@ -56,8 +60,8 @@ class _ProfileTabState extends State<ProfileTab> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Route Academy', style: AppStyles.bold24White),
-                    Text('Route@gmail.com', style: AppStyles.bold16White),
+                    Text(userProvider.currentUser!.name, style: AppStyles.bold24White),
+                    Text(userProvider.currentUser!.email, style: AppStyles.bold16White),
                   ],
                 ),
               ),
@@ -151,8 +155,9 @@ class _ProfileTabState extends State<ProfileTab> {
             Spacer(),
             CustomElevatedButton(
               onPressed: () {
+               // eventListProvider.favoriteEventList = [];
                 //TODO: Navigate to login
-                Navigator.pushReplacementNamed(context, AppRoutes.loginRouteName);
+                Navigator.pushNamedAndRemoveUntil(context, AppRoutes.loginRouteName, (route) => false);
               },
               text: AppLocalizations.of(context)!.profile_logout,
               textStyle: AppStyles.regular20white,

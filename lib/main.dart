@@ -3,6 +3,7 @@ import 'package:evently_app/firebase_options.dart';
 import 'package:evently_app/providers/app_language_provider.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
 import 'package:evently_app/providers/event_list_provider.dart';
+import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/auth/login/login_screen.dart';
 import 'package:evently_app/ui/auth/register/register_screen.dart';
 import 'package:evently_app/ui/home/add_event/add_event.dart';
@@ -22,7 +23,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ); // store data on phone
-  await FirebaseFirestore.instance.disableNetwork();
+  //await FirebaseFirestore.instance.disableNetwork();
+  await FirebaseFirestore.instance.enableNetwork();
 
   final prefs = await SharedPreferences.getInstance();
   final seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
@@ -32,6 +34,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => AppLanguageProvider()),
         ChangeNotifierProvider(create: (context) => AppThemeProvider()),
         ChangeNotifierProvider(create: (context) => EventListProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: MyApp(showOnboarding: !seenOnboarding),
     ),
