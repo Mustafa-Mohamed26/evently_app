@@ -1,4 +1,7 @@
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/models/my_user.dart';
+import 'package:evently_app/providers/event_list_provider.dart';
+import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
 import 'package:evently_app/ui/widgets/custom_text_field.dart';
 import 'package:evently_app/utils/app_assets.dart';
@@ -6,8 +9,10 @@ import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_routes.dart';
 import 'package:evently_app/utils/app_styles.dart';
 import 'package:evently_app/utils/dialog_utils.dart';
+import 'package:evently_app/utils/firebase_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -34,7 +39,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void register() async {
     if (formKey.currentState!.validate()) {
-     
       DialogUtils.showLoading(context: context, loadingText: 'Loading...');
       try {
         final credential = await FirebaseAuth.instance
@@ -42,6 +46,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
               email: emailController.text,
               password: passwordController.text,
             );
+        MyUser myUser = MyUser(
+          id: credential.user!.uid,
+          name: nameController.text,
+          email: emailController.text,
+        );
+        await FirebaseUtils.addUserToFirestore(myUser);
+        //TODO: save user in provder
+        
+        var userProvider = Provider.of<UserProvider>(context, listen: false); // provider only once
+        userProvider.updateUser(myUser);
+
+        var eventListProvider = Provider.of<EventListProvider>(context, listen: false); // provider only once
+        eventListProvider.changeSelectedIndex(0, userProvider.currentUser!.id);
+        eventListProvider.getAllFavoriteEventFromFireStore(userProvider.currentUser!.id);
+
         DialogUtils.hideLoading(context: context);
         DialogUtils.showMessage(
           context: context,
@@ -60,11 +79,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (e.code == 'weak-password') {
           print('The password provided is too weak.');
         } else if (e.code == 'email-already-in-use') {
-           DialogUtils.hideLoading(context: context);
+          DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
             context: context,
-            message:
-                'The account already exists for that email. Please login',
+            message: 'The account already exists for that email. Please login',
             title: 'Error',
             posActionName: 'OK',
             posAction: () => Navigator.pop(context),
