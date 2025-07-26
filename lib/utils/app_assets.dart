@@ -21,6 +21,7 @@ class AppAssets {
   static const String meetingImage = 'assets/images/Meeting_image.png';
   static const String sportImage = 'assets/images/Sport_image.png';
   static const String workshopImage = 'assets/images/Workshop_image.png';
+  static const String map = 'assets/images/map_image.png';
 
   // onboarding screen
   static const String appLogoOnboarding =

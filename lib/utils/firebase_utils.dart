@@ -35,6 +35,25 @@ class FirebaseUtils {
     return querySnapshot.data();
   }
 
+  static Future<void> deleteEventFromFirestore(
+    String userId,
+    String eventId,
+  ) async {
+    await getEventsCollection(userId).doc(eventId).delete();
+  }
+
+  static Future<void> updateEventInFirestore(Event event, String userId) {
+    return getEventsCollection(userId).doc(event.id).update({
+      'id': event.id,
+      'title': event.title,
+      'description': event.description,
+      'event_image': event.eventImage,
+      'event_name': event.eventName,
+      'event_time': event.eventTime,
+      'event_data_time': event.eventDataTime.millisecondsSinceEpoch, // int
+    });
+  }
+
   // signin with google
 
   static Future<UserCredential> signInWithGoogle() async {

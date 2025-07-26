@@ -71,6 +71,9 @@ class _LoveTabState extends State<LoveTab> {
                     itemBuilder: (context, index) {
                       return EventItem(
                         event: eventListProvider.favoriteEventList[index],
+                        onPressed: () {
+                          // Navigate to event details or perform any action
+                        },
                       );
                     },
                     separatorBuilder: (context, index) {

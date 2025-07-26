@@ -3,6 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppStyles {
+  static TextStyle regular16Black = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: AppColors.blackColor,
+  );
+  static TextStyle regular24primary = GoogleFonts.inter(
+    fontSize: 24,
+    fontWeight: FontWeight.w500,
+    color: AppColors.primaryLight
+  );
+  static TextStyle bold20primary = GoogleFonts.inter(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: AppColors.primaryLight,
+  );
   static TextStyle regular20white = GoogleFonts.inter(
     fontSize: 20,
     fontWeight: FontWeight.w400,

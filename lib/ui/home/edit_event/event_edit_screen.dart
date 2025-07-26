@@ -2,7 +2,6 @@ import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/event.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
 import 'package:evently_app/providers/event_list_provider.dart';
-import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/home/add_event/widgets/date_or_time_widget.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_tab_item.dart';
 import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
@@ -16,14 +15,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class AddEvent extends StatefulWidget {
-  AddEvent({super.key});
+class EventEditScreen extends StatefulWidget {
+  const EventEditScreen({super.key});
 
   @override
-  State<AddEvent> createState() => _AddEventState();
+  State<EventEditScreen> createState() => _EventEditScreenState();
 }
 
-class _AddEventState extends State<AddEvent> {
+class _EventEditScreenState extends State<EventEditScreen> {
   int selectedIndex = 0;
   String selectedEventImage = '';
   String selectedEventName = '';
@@ -34,11 +33,97 @@ class _AddEventState extends State<AddEvent> {
   String formateDate = '';
   TimeOfDay? selectedTime;
   String formateTime = '';
-  late EventListProvider eventListProvider;
   bool isSubmitted = false;
+  bool isInitialized = false;
+
+  void chooseDate() async {
+    var chooseDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 365)),
+    );
+
+    selectedDate = chooseDate;
+    if (selectedDate != null) {
+      formateDate = DateFormat('dd/MM/yyyy').format(selectedDate!);
+      setState(() {});
+    }
+  }
+
+  void chooseTime() async {
+    var chooseTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    selectedTime = chooseTime;
+    if (selectedTime != null) {
+      formateTime = selectedTime!.format(context);
+      setState(() {});
+    }
+  }
+
+  void updateEvent() {
+    isSubmitted = true;
+    setState(() {});
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
+    final event = args['event'];
+    final userId = args['userId'];
+    var eventListProvider = Provider.of<EventListProvider>(
+      context,
+      listen: false,
+    );
+
+    if (formKey.currentState!.validate() == true &&
+        selectedDate != null &&
+        selectedTime != null) {
+      // Combine selectedDate and selectedTime into a DateTime
+      final updatedDateTime = DateTime(
+        selectedDate!.year,
+        selectedDate!.month,
+        selectedDate!.day,
+        selectedTime!.hour,
+        selectedTime!.minute,
+      );
+
+      // Create updated event object (make sure to keep the event id)
+      Event updatedEvent = Event(
+        id: event.id,
+        title: titleController.text,
+        description: descriptionController.text,
+        eventImage: selectedEventImage,
+        eventName: selectedEventName,
+        eventDataTime: updatedDateTime,
+        eventTime: formateTime,
+      );
+
+      FirebaseUtils.updateEventInFirestore(updatedEvent, userId)
+          .then((value) {
+            ToastUtils.toastMsg(
+              msg: "Event updated Successfully",
+              backGroundColor: AppColors.primaryLight,
+              textColor: AppColors.whiteColor,
+            );
+            // get all events => refresh
+            eventListProvider.getAllEvents(userId);
+            Navigator.pop(context);
+            Navigator.pop(context); // double pop
+          })
+          .catchError((error) {
+            ToastUtils.toastMsg(
+              msg: "Failed to update event",
+              backGroundColor: AppColors.redColor,
+              textColor: AppColors.whiteColor,
+            );
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
+    final event = args['event'];
     List<String> eventsNameList = [
       AppLocalizations.of(context)!.category_sport,
       AppLocalizations.of(context)!.category_birthday,
@@ -63,107 +148,36 @@ class _AddEventState extends State<AddEvent> {
       AppAssets.eatingImage,
     ];
 
-    //TODO: handle the events Images in dark mode
+    if (!isInitialized && event != null) {
+      titleController.text = event.title;
+      descriptionController.text = event.description;
+      selectedDate = event.eventDataTime;
+      formateDate = DateFormat('dd/MM/yyyy').format(selectedDate!);
+      selectedTime = TimeOfDay.fromDateTime(event.eventDataTime);
+      formateTime = selectedTime!.format(context);
 
-    Map<String, String> events = {
-      AppLocalizations.of(context)!.category_sport: AppAssets.sportImage,
-      AppLocalizations.of(context)!.category_birthday: AppAssets.birthdayImage,
-      AppLocalizations.of(context)!.category_meeting: AppAssets.meetingImage,
-      AppLocalizations.of(context)!.category_gaming: AppAssets.gamingImage,
-      AppLocalizations.of(context)!.category_workshop: AppAssets.workshopImage,
-      AppLocalizations.of(context)!.category_bookclub: AppAssets.bookClubImage,
-      AppLocalizations.of(context)!.category_exhibition:
-          AppAssets.exhibitionImage,
-      AppLocalizations.of(context)!.category_holiday: AppAssets.holidayImage,
-      AppLocalizations.of(context)!.category_eating: AppAssets.eatingImage,
-    };
+      // Assign the index based on the received event name
+      selectedIndex = eventsNameList.indexOf(event.eventName);
+      if (selectedIndex == -1) selectedIndex = 0; // fallback if not found
+
+      selectedEventImage = eventsImageList[selectedIndex];
+      selectedEventName = eventsNameList[selectedIndex];
+
+      isInitialized = true;
+    }
 
     selectedEventImage = eventsImageList[selectedIndex];
     selectedEventName = eventsNameList[selectedIndex];
 
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    var ThemeProvider = Provider.of<AppThemeProvider>(context);
-    eventListProvider = Provider.of<EventListProvider>(context);
-
-    //TODO: handle the ui of the date and time picker in dark mode and light mode
-    //TODO: handle the localization of the date and time picker in dark mode and light mode
-    void chooseDate() async {
-      var chooseDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(Duration(days: 365)),
-      );
-
-      selectedDate = chooseDate;
-      if (selectedDate != null) {
-        formateDate = DateFormat('dd/MM/yyyy').format(selectedDate!);
-        setState(() {});
-      }
-    }
-
-    void chooseTime() async {
-      var chooseTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.now(),
-      );
-
-      selectedTime = chooseTime;
-      if (selectedTime != null) {
-        formateTime = selectedTime!.format(context);
-        setState(() {});
-      }
-    }
-
-    void addEvent() {
-      isSubmitted = true;
-      setState(() {});
-      if (formKey.currentState!.validate() == true &&
-          selectedDate != null &&
-          selectedTime != null) {
-        //TODO: add event to firebase fireStore database and navigate to home
-        Event event = Event(
-          title: titleController.text,
-          description: descriptionController.text,
-          eventImage: selectedEventImage,
-          eventName: selectedEventName,
-          eventDataTime: selectedDate!,
-          eventTime: formateDate,
-        );
-        var userProvider = Provider.of<UserProvider>(context, listen: false);
-        FirebaseUtils.addEventToFireStore(event, userProvider.currentUser!.id)
-            .then((value) {
-              ToastUtils.toastMsg(
-                msg: "Event added Successfully",
-                backGroundColor: AppColors.primaryLight,
-                textColor: AppColors.whiteColor,
-              );
-              // get all events => refresh
-              eventListProvider.getAllEvents(userProvider.currentUser!.id);
-            })
-            .timeout(
-              Duration(microseconds: 500),
-              onTimeout: () {
-                ToastUtils.toastMsg(
-                  msg: "Event added Successfully",
-                  backGroundColor: AppColors.primaryLight,
-                  textColor: AppColors.whiteColor,
-                );
-                // get all events => refresh
-                eventListProvider.getAllEvents(userProvider.currentUser!.id);
-                Navigator.pop(context);
-              },
-            );
-      }
-    }
-
+    var height = MediaQuery.of(context).size.height;
+    var themeProvider = Provider.of<AppThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.transparentColor,
         centerTitle: true,
         title: Text(
-          "Create Event",
+          "Edit Event",
           style: AppStyles.medium20Primary,
         ), // TODO: Localize
       ),
@@ -231,7 +245,7 @@ class _AddEventState extends State<AddEvent> {
                         }
                         return null;
                       },
-                      colorBorderSide: ThemeProvider.isDarkMode()
+                      colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,
 
@@ -257,7 +271,7 @@ class _AddEventState extends State<AddEvent> {
                         }
                         return null;
                       },
-                      colorBorderSide: ThemeProvider.isDarkMode()
+                      colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,
                       hintStyle: Theme.of(context).textTheme.titleMedium,
@@ -351,10 +365,8 @@ class _AddEventState extends State<AddEvent> {
                     ),
                     SizedBox(height: height * 0.02),
                     CustomElevatedButton(
-                      onPressed: () {
-                        addEvent();
-                      },
-                      text: "Add Event", //TODO: Localization
+                      onPressed: updateEvent,
+                      text: "Update Event", //TODO: Localization
                     ),
                   ],
                 ),
