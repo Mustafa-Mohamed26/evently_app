@@ -46,7 +46,7 @@ class EventDetailsScreen extends StatelessWidget {
           IconButton(
             onPressed: () async {
               await FirebaseUtils.deleteEventFromFirestore(userId, event.id);
-              eventListProvider.getFilteredEventsFromFireStore(userId);
+              eventListProvider.getAllEvents(userId);
               ToastUtils.toastMsg(
                 msg: "Event deleted Successfully",
                 backGroundColor: AppColors.redColor,

@@ -122,7 +122,6 @@ class _AddEventState extends State<AddEvent> {
       if (formKey.currentState!.validate() == true &&
           selectedDate != null &&
           selectedTime != null) {
-        //TODO: add event to firebase fireStore database and navigate to home
         Event event = Event(
           title: titleController.text,
           description: descriptionController.text,
@@ -139,22 +138,16 @@ class _AddEventState extends State<AddEvent> {
                 backGroundColor: AppColors.primaryLight,
                 textColor: AppColors.whiteColor,
               );
-              // get all events => refresh
               eventListProvider.getAllEvents(userProvider.currentUser!.id);
+              Navigator.pop(context);
             })
-            .timeout(
-              Duration(microseconds: 500),
-              onTimeout: () {
-                ToastUtils.toastMsg(
-                  msg: "Event added Successfully",
-                  backGroundColor: AppColors.primaryLight,
-                  textColor: AppColors.whiteColor,
-                );
-                // get all events => refresh
-                eventListProvider.getAllEvents(userProvider.currentUser!.id);
-                Navigator.pop(context);
-              },
-            );
+            .catchError((error) {
+              ToastUtils.toastMsg(
+                msg: "Failed to add event",
+                backGroundColor: AppColors.redColor,
+                textColor: AppColors.whiteColor,
+              );
+            });
       }
     }
 
