@@ -6,6 +6,7 @@ import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_item.dart';
 import 'package:evently_app/ui/home/tabs/home_tab/widget/event_tab_item.dart';
 import 'package:evently_app/utils/app_colors.dart';
+import 'package:evently_app/utils/app_routes.dart';
 import 'package:evently_app/utils/app_styles.dart';
 import 'package:evently_app/utils/firebase_utils.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,6 @@ class _HomeTabState extends State<HomeTab> {
       eventListProvider.getAllEvents(userProvider.currentUser!.id);
     }
 
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -50,7 +50,10 @@ class _HomeTabState extends State<HomeTab> {
                   AppLocalizations.of(context)!.home_welcome,
                   style: AppStyles.regular14white,
                 ),
-                Text(userProvider.currentUser!.name, style: AppStyles.bold24White),
+                Text(
+                  userProvider.currentUser!.name,
+                  style: AppStyles.bold24White,
+                ),
               ],
             ),
             Spacer(),
@@ -108,7 +111,10 @@ class _HomeTabState extends State<HomeTab> {
                   indicatorColor: AppColors.transparentColor,
                   dividerColor: AppColors.transparentColor,
                   onTap: (index) {
-                    eventListProvider.changeSelectedIndex(index, userProvider.currentUser!.id);
+                    eventListProvider.changeSelectedIndex(
+                      index,
+                      userProvider.currentUser!.id,
+                    );
                     setState(() {});
                   },
                   tabs: eventListProvider.eventsNameList.map((eventName) {
@@ -148,6 +154,17 @@ class _HomeTabState extends State<HomeTab> {
                     itemBuilder: (context, index) {
                       return EventItem(
                         event: eventListProvider.filteredEventList[index],
+                        onPressed: () {
+                          // Navigate to event details or perform any action
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.eventDetailsRouteName,
+                            arguments: {
+                              'event':
+                                  eventListProvider.filteredEventList[index],
+                              'userId': userProvider.currentUser!.id,
+                            },
+                          );
+                        },
                       );
                     },
                     separatorBuilder: (context, index) {

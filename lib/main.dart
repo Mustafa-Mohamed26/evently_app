@@ -3,10 +3,13 @@ import 'package:evently_app/firebase_options.dart';
 import 'package:evently_app/providers/app_language_provider.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
 import 'package:evently_app/providers/event_list_provider.dart';
+import 'package:evently_app/providers/selected_index_edit_provider.dart';
 import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/auth/login/login_screen.dart';
 import 'package:evently_app/ui/auth/register/register_screen.dart';
 import 'package:evently_app/ui/home/add_event/add_event.dart';
+import 'package:evently_app/ui/home/edit_event/event_edit_screen.dart';
+import 'package:evently_app/ui/home/event_details/event_details_screen.dart';
 import 'package:evently_app/ui/home/home_screen.dart';
 import 'package:evently_app/ui/onboarding/onboarding1_screen.dart';
 import 'package:evently_app/ui/onboarding/onboarding2_screen.dart';
@@ -35,6 +38,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => AppThemeProvider()),
         ChangeNotifierProvider(create: (context) => EventListProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => SelectedIndexEditProvider()),
       ],
       child: MyApp(showOnboarding: !seenOnboarding),
     ),
@@ -64,6 +68,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.registerRouteName: (context) => RegisterScreen(),
         AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.addEventRouteName: (context) => AddEvent(),
+        AppRoutes.eventDetailsRouteName: (context) => EventDetailsScreen(),
+        AppRoutes.editEventRouteName: (context) => EventEditScreen(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

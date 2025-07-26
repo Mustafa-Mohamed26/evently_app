@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently_app/models/event.dart';
 import 'package:evently_app/models/my_user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseUtils {
   static CollectionReference<Event> getEventsCollection(String uId) {
-    return getUsersCollection().doc(uId)
+    return getUsersCollection()
+        .doc(uId)
         .collection(Event.collectionName)
         .withConverter<Event>(
           fromFirestore: (snapshot, options) =>
@@ -27,9 +30,55 @@ class FirebaseUtils {
     return getUsersCollection().doc(user.id).set(user);
   }
 
-  static Future<MyUser?> readUserFromFireStore(String id) async{
+  static Future<MyUser?> readUserFromFireStore(String id) async {
     var querySnapshot = await getUsersCollection().doc(id).get();
     return querySnapshot.data();
+  }
+
+  static Future<void> deleteEventFromFirestore(
+    String userId,
+    String eventId,
+  ) async {
+    await getEventsCollection(userId).doc(eventId).delete();
+  }
+
+  static Future<void> updateEventInFirestore(Event event, String userId) {
+    return getEventsCollection(userId).doc(event.id).update({
+      'id': event.id,
+      'title': event.title,
+      'description': event.description,
+      'event_image': event.eventImage,
+      'event_name': event.eventName,
+      'event_time': event.eventTime,
+      'event_data_time': event.eventDataTime.millisecondsSinceEpoch, // int
+    });
+  }
+
+  // signin with google
+
+  static Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    if (googleUser == null) {
+      throw FirebaseAuthException(
+        code: 'ERROR_ABORTED_BY_USER',
+        message: 'Google sign-in aborted by user',
+      );
+    }
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   static Future<void> addEventToFireStore(Event event, String uId) {
