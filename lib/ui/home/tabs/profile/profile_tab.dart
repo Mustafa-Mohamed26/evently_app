@@ -11,6 +11,7 @@ import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_routes.dart';
 import 'package:evently_app/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -60,8 +61,8 @@ class _ProfileTabState extends State<ProfileTab> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(userProvider.currentUser!.name, style: AppStyles.bold24White),
-                    Text(userProvider.currentUser!.email, style: AppStyles.bold16White),
+                    Text(userProvider.currentUser!.name, style: AppStyles.bold20White),
+                    Text(userProvider.currentUser!.email, style: AppStyles.bold12White),
                   ],
                 ),
               ),
@@ -154,7 +155,10 @@ class _ProfileTabState extends State<ProfileTab> {
             ),
             Spacer(),
             CustomElevatedButton(
-              onPressed: () {
+              onPressed: () async{
+                //logout form google
+                GoogleSignIn googleSignIn = GoogleSignIn();
+                await googleSignIn.signOut(); 
                // eventListProvider.favoriteEventList = [];
                 //TODO: Navigate to login
                 Navigator.pushNamedAndRemoveUntil(context, AppRoutes.loginRouteName, (route) => false);
