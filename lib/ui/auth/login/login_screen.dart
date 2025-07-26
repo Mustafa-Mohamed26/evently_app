@@ -1,4 +1,5 @@
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/models/my_user.dart';
 import 'package:evently_app/providers/event_list_provider.dart';
 import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
@@ -183,6 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         textStyle: AppStyles.medium20Primary,
                         onPressed: () {
                           //TODO: login with google
+                          loginWithGoogle();
                         },
                       ),
                     ],
@@ -209,18 +211,28 @@ class _LoginScreenState extends State<LoginScreen> {
               password: passwordController.text,
             );
         //TODO: read user from fireStore
-        var user = await FirebaseUtils.readUserFromFireStore(credential.user?.uid??'');
-        if(user == null){
+        var user = await FirebaseUtils.readUserFromFireStore(
+          credential.user?.uid ?? '',
+        );
+        if (user == null) {
           return;
         }
         //TODO: save user in provder
-        
-        var userProvider = Provider.of<UserProvider>(context, listen: false); // provider only once
+
+        var userProvider = Provider.of<UserProvider>(
+          context,
+          listen: false,
+        ); // provider only once
         userProvider.updateUser(user);
 
-        var eventListProvider = Provider.of<EventListProvider>(context, listen: false); // provider only once
+        var eventListProvider = Provider.of<EventListProvider>(
+          context,
+          listen: false,
+        ); // provider only once
         eventListProvider.changeSelectedIndex(0, userProvider.currentUser!.id);
-        eventListProvider.getAllFavoriteEventFromFireStore(userProvider.currentUser!.id);
+        eventListProvider.getAllFavoriteEventFromFireStore(
+          userProvider.currentUser!.id,
+        );
 
         DialogUtils.hideLoading(context: context);
         DialogUtils.showMessage(
@@ -268,6 +280,93 @@ class _LoginScreenState extends State<LoginScreen> {
           posActionName: 'OK',
         );
       }
+    }
+  }
+
+  void loginWithGoogle() async {
+    DialogUtils.showLoading(
+      context: context,
+      loadingText: 'Signing in with Google...',
+    );
+
+    try {
+      // Sign in with Google
+      final credential = await FirebaseUtils.signInWithGoogle();
+
+      // Check if credential or user is null (shouldn't happen with current FirebaseUtils)
+      if (credential.user == null) {
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(
+          context: context,
+          message: 'Google sign-in was cancelled or failed.',
+          title: 'Error',
+          posActionName: 'OK',
+        );
+        return;
+      }
+
+      // Read user from Firestore
+      var user = await FirebaseUtils.readUserFromFireStore(
+        credential.user!.uid,
+      );
+
+      // If user doesn't exist in Firestore, create it
+      if (user == null) {
+        final newUser = MyUser(
+          id: credential.user!.uid,
+          email: credential.user!.email ?? '',
+          name: credential.user!.displayName ?? 'No Name',
+        );
+        await FirebaseUtils.addUserToFirestore(newUser);
+        user = newUser;
+      }
+
+      // Save user to provider
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.updateUser(user);
+
+      var eventListProvider = Provider.of<EventListProvider>(
+        context,
+        listen: false,
+      );
+      eventListProvider.changeSelectedIndex(0, userProvider.currentUser!.id);
+      eventListProvider.getAllFavoriteEventFromFireStore(
+        userProvider.currentUser!.id,
+      );
+
+      DialogUtils.hideLoading(context: context);
+      DialogUtils.showMessage(
+        context: context,
+        barrierDismissible: false,
+        message: 'Google login successful',
+        title: 'Success',
+        posActionName: 'OK',
+        posAction: () => Navigator.pushNamedAndRemoveUntil(
+          context,
+          AppRoutes.homeRouteName,
+          (_) => false,
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      DialogUtils.hideLoading(context: context);
+      DialogUtils.showMessage(
+        context: context,
+        barrierDismissible: false,
+        message: e.message ?? 'Firebase error occurred',
+        title: 'Error',
+        posActionName: 'OK',
+        posAction: () => Navigator.pop(context),
+      );
+    } catch (e) {
+      DialogUtils.hideLoading(context: context);
+      DialogUtils.showMessage(
+        context: context,
+        barrierDismissible: false,
+        message: e.toString(),
+        title: 'Error',
+        posActionName: 'OK',
+        posAction: () => Navigator.pop(context),
+      );
     }
   }
 }
