@@ -3,7 +3,6 @@ import 'package:evently_app/firebase_options.dart';
 import 'package:evently_app/providers/app_language_provider.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
 import 'package:evently_app/providers/event_list_provider.dart';
-import 'package:evently_app/providers/selected_index_edit_provider.dart';
 import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/auth/login/login_screen.dart';
 import 'package:evently_app/ui/auth/register/register_screen.dart';
@@ -22,24 +21,38 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'l10n/app_localizations.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); //to ensure that the widgets are initialized
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  ); // store data on phone
-  //await FirebaseFirestore.instance.disableNetwork();
-  await FirebaseFirestore.instance.enableNetwork();
+  // Ensure that Flutter bindings are initialized before using any widgets
+  WidgetsFlutterBinding.ensureInitialized();
 
+  // Initialize Firebase
+  // This is necessary to use Firebase services like Firestore
+  await Firebase.initializeApp(
+    // Use the default Firebase options for the current platform
+    // This will automatically select the correct configuration for Android, iOS, web, etc.
+    options: DefaultFirebaseOptions.currentPlatform,
+  ); 
+  // store data on phone
+  //await FirebaseFirestore.instance.disableNetwork();
+  await FirebaseFirestore.instance.enableNetwork(); // Enable Firestore network to allow data storage and retrieval
+
+  // Initialize SharedPreferences to check if the user has seen the onboarding screen
+  // This is used to determine whether to show the onboarding screen or go directly to the login
   final prefs = await SharedPreferences.getInstance();
   final seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
+
+  // If the user has not seen the onboarding screen, set it to true
   runApp(
+    // Use MultiProvider to provide multiple ChangeNotifier providers to the widget tree
+    // This allows different parts of the app to access shared data and state management
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AppLanguageProvider()),
         ChangeNotifierProvider(create: (context) => AppThemeProvider()),
         ChangeNotifierProvider(create: (context) => EventListProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
-        ChangeNotifierProvider(create: (context) => SelectedIndexEditProvider()),
       ],
+      // The MyApp widget is the root of the application
+      // It takes a boolean parameter to determine whether to show the onboarding screen
       child: MyApp(showOnboarding: !seenOnboarding),
     ),
   );
@@ -51,13 +64,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Access the AppLanguageProvider and AppThemeProvider using Provider.of
+    // This allows the app to use the current language and theme settings
     var appLanguageProvider = Provider.of<AppLanguageProvider>(context);
+    // Access the AppThemeProvider to get the current theme mode
+    // This is used to apply the correct theme to the MaterialApp
     var appThemeProvider = Provider.of<AppThemeProvider>(context);
+    
+    // Return a MaterialApp widget that serves as the root of the application
+    // It provides localization support, routing, theming, and other app-wide configurations
     return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale(appLanguageProvider.appLanguage),
-      debugShowCheckedModeBanner: false,
+      // Use the generated AppLocalizations class to provide localized strings
+      localizationsDelegates: AppLocalizations.localizationsDelegates, // Use the generated AppLocalizations class
+      supportedLocales: AppLocalizations.supportedLocales, // List of supported locales for localization
+      locale: Locale(appLanguageProvider.appLanguage), // Set the current locale based on the appLanguageProvider
+      
+      
+      debugShowCheckedModeBanner: false, // Disable the debug banner in the top right corner of the app
+
+      // Define the initial route of the app based on whether the user has seen the onboarding screen
+      // If showOnboarding is true, the app will start with the onboarding screen
       initialRoute: showOnboarding
           ? AppRoutes.onboarding1RouteName
           : AppRoutes.loginRouteName,
@@ -71,6 +97,9 @@ class MyApp extends StatelessWidget {
         AppRoutes.eventDetailsRouteName: (context) => EventDetailsScreen(),
         AppRoutes.editEventRouteName: (context) => EventEditScreen(),
       },
+
+      // Set the theme of the app based on the current theme mode from AppThemeProvider
+      // This allows the app to switch between light and dark themes based on user preference
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: appThemeProvider.appTheme,

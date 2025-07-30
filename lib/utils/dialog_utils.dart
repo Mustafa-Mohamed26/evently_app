@@ -3,6 +3,8 @@ import 'package:evently_app/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class DialogUtils {
+  /// Shows a loading dialog with a circular progress indicator and a loading text.
+  /// The dialog is not dismissible by tapping outside.
   static void showLoading({
     required BuildContext context,
     required String loadingText,
@@ -15,9 +17,16 @@ class DialogUtils {
           children: [
             CircularProgressIndicator(color: AppColors.primaryLight),
             SizedBox(width: 20),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(loadingText, style: AppStyles.medium16Black),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  loadingText,
+                  style: AppStyles.medium16Black,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+              ),
             ),
           ],
         ),
@@ -25,10 +34,14 @@ class DialogUtils {
     );
   }
 
+  /// Hides the currently displayed loading dialog.
+  /// It is assumed that a loading dialog is currently being shown.
   static void hideLoading({required BuildContext context}) {
     Navigator.pop(context);
   }
 
+  /// Shows a message dialog with a title, message, and optional positive and negative actions.
+  /// The dialog can be dismissed by tapping outside if `barrierDismissible` is true
   static void showMessage({
     required BuildContext context,
     required String message,

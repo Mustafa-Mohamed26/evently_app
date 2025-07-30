@@ -236,6 +236,96 @@ abstract class AppLocalizations {
   /// **'Login With Google'**
   String get login_google;
 
+  /// No description provided for @login_empty_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Your Email'**
+  String get login_empty_email;
+
+  /// No description provided for @login_valid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Valid Email'**
+  String get login_valid_email;
+
+  /// No description provided for @login_empty_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Your Password'**
+  String get login_empty_password;
+
+  /// No description provided for @login_6_characters.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get login_6_characters;
+
+  /// No description provided for @loading_login.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading_login;
+
+  /// No description provided for @loading_google.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in with Google...'**
+  String get loading_google;
+
+  /// No description provided for @login_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Login success'**
+  String get login_success;
+
+  /// No description provided for @login_success_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get login_success_title;
+
+  /// No description provided for @login_success_action.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get login_success_action;
+
+  /// No description provided for @google_login_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Google login successful'**
+  String get google_login_success;
+
+  /// No description provided for @google_login_cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in was cancelled or failed.'**
+  String get google_login_cancelled;
+
+  /// No description provided for @error_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error_title;
+
+  /// No description provided for @error_invalid_credential.
+  ///
+  /// In en, this message translates to:
+  /// **'The supplied auth credential is incorrect, malformed or has expired.'**
+  String get error_invalid_credential;
+
+  /// No description provided for @error_no_internet.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection'**
+  String get error_no_internet;
+
+  /// No description provided for @error_firebase.
+  ///
+  /// In en, this message translates to:
+  /// **'Firebase error occurred'**
+  String get error_firebase;
+
   /// No description provided for @register_Title.
   ///
   /// In en, this message translates to:
@@ -275,7 +365,7 @@ abstract class AppLocalizations {
   /// No description provided for @register_have.
   ///
   /// In en, this message translates to:
-  /// **'Already Have Account'**
+  /// **'Already Have Account ?'**
   String get register_have;
 
   /// No description provided for @register_login.
@@ -283,6 +373,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Login'**
   String get register_login;
+
+  /// No description provided for @register_empty_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your name'**
+  String get register_empty_name;
+
+  /// No description provided for @register_empty_repassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password again'**
+  String get register_empty_repassword;
+
+  /// No description provided for @register_password_not_match.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get register_password_not_match;
+
+  /// No description provided for @register_loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get register_loading;
+
+  /// No description provided for @register_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration success'**
+  String get register_success;
+
+  /// No description provided for @register_success_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get register_success_title;
+
+  /// No description provided for @register_success_ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get register_success_ok;
+
+  /// No description provided for @register_email_exists.
+  ///
+  /// In en, this message translates to:
+  /// **'The account already exists for that email. Please login'**
+  String get register_email_exists;
+
+  /// No description provided for @register_error_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get register_error_title;
+
+  /// No description provided for @register_no_internet.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection'**
+  String get register_no_internet;
+
+  /// No description provided for @register_weak_password.
+  ///
+  /// In en, this message translates to:
+  /// **'The password provided is too weak.'**
+  String get register_weak_password;
 
   /// No description provided for @forgetPassword_title.
   ///

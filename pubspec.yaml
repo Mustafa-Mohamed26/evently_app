@@ -49,6 +49,7 @@ dependencies:
   fluttertoast: ^8.2.12
   firebase_auth: ^5.7.0
   google_sign_in: ^5.4.4
+  colorful_iconify_flutter: ^0.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
