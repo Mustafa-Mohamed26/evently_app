@@ -17,7 +17,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class AddEvent extends StatefulWidget {
-  AddEvent({super.key});
+  const AddEvent({super.key});
 
   @override
   State<AddEvent> createState() => _AddEventState();
@@ -65,25 +65,14 @@ class _AddEventState extends State<AddEvent> {
 
     //TODO: handle the events Images in dark mode
 
-    Map<String, String> events = {
-      AppLocalizations.of(context)!.category_sport: AppAssets.sportImage,
-      AppLocalizations.of(context)!.category_birthday: AppAssets.birthdayImage,
-      AppLocalizations.of(context)!.category_meeting: AppAssets.meetingImage,
-      AppLocalizations.of(context)!.category_gaming: AppAssets.gamingImage,
-      AppLocalizations.of(context)!.category_workshop: AppAssets.workshopImage,
-      AppLocalizations.of(context)!.category_bookclub: AppAssets.bookClubImage,
-      AppLocalizations.of(context)!.category_exhibition:
-          AppAssets.exhibitionImage,
-      AppLocalizations.of(context)!.category_holiday: AppAssets.holidayImage,
-      AppLocalizations.of(context)!.category_eating: AppAssets.eatingImage,
-    };
+    
 
     selectedEventImage = eventsImageList[selectedIndex];
     selectedEventName = eventsNameList[selectedIndex];
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    var ThemeProvider = Provider.of<AppThemeProvider>(context);
+    var themeProvider = Provider.of<AppThemeProvider>(context);
     eventListProvider = Provider.of<EventListProvider>(context);
 
     //TODO: handle the ui of the date and time picker in dark mode and light mode
@@ -224,7 +213,7 @@ class _AddEventState extends State<AddEvent> {
                         }
                         return null;
                       },
-                      colorBorderSide: ThemeProvider.isDarkMode()
+                      colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,
 
@@ -250,7 +239,7 @@ class _AddEventState extends State<AddEvent> {
                         }
                         return null;
                       },
-                      colorBorderSide: ThemeProvider.isDarkMode()
+                      colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,
                       hintStyle: Theme.of(context).textTheme.titleMedium,

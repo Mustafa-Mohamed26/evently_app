@@ -1,17 +1,14 @@
-import 'dart:math';
-
 import 'package:evently_app/utils/app_colors.dart';
-import 'package:evently_app/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class EventTabItem extends StatelessWidget {
-  bool isSelected;
-  String eventName;
-  Color selectedBgColor;
-  TextStyle? selectedTextStyle;
-  TextStyle? unSelectedTextStyle;
-  Color? borderColor;
-  EventTabItem({
+  final bool isSelected;
+  final String eventName;
+  final Color selectedBgColor;
+  final TextStyle? selectedTextStyle;
+  final TextStyle? unSelectedTextStyle;
+  final Color? borderColor;
+  const EventTabItem({
     super.key,
     required this.isSelected,
     required this.eventName,
