@@ -9,6 +9,7 @@ import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
 import 'package:evently_app/ui/widgets/custom_text_field.dart';
 import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
+import 'package:evently_app/utils/app_resources.dart';
 import 'package:evently_app/utils/app_styles.dart';
 import 'package:evently_app/utils/firebase_utils.dart';
 import 'package:evently_app/utils/toast_utils.dart';
@@ -64,11 +65,25 @@ class _AddEventState extends State<AddEvent> {
     ];
 
     //TODO: handle the events Images in dark mode
+    
+    List iconsList = [
+    Icons.all_inclusive_outlined,
+    Icons.sports_soccer_outlined,
+    Icons.cake_outlined,
+    Icons.business_center_outlined,
+    Icons.videogame_asset_outlined,
+    Icons.theater_comedy_outlined,
+    Icons.book_outlined,
+    Icons.image_outlined,
+    Icons.beach_access_outlined,
+    Icons.restaurant_menu_outlined
+  ];
 
     
 
     selectedEventImage = eventsImageList[selectedIndex];
-    selectedEventName = eventsNameList[selectedIndex];
+    //selectedEventName = eventsNameList[selectedIndex];
+    selectedEventName = AppResources.categoriesSelectedList[selectedIndex + 1];
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
@@ -175,6 +190,9 @@ class _AddEventState extends State<AddEvent> {
                         setState(() {});
                       },
                       child: EventTabItem(
+                        icon: iconsList[index],
+                        iconColor: AppColors.whiteColor,
+                        unSelectedIconColor: AppColors.primaryLight,
                         borderColor: AppColors.primaryLight,
                         unSelectedTextStyle: Theme.of(
                           context,

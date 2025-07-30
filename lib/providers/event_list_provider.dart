@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/event.dart';
 import 'package:evently_app/utils/app_colors.dart';
+import 'package:evently_app/utils/app_resources.dart';
 import 'package:evently_app/utils/firebase_utils.dart';
 import 'package:evently_app/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,16 @@ class EventListProvider extends ChangeNotifier {
   List<Event> eventList = [];
   List<Event> filteredEventList = [];
   List<String> eventsNameList = [];
+  List<String> eventsNameListLocalizations = [];
   List<Event> favoriteEventList = [];
   int selectedIndex = 0;
 
   List<String> getEventsNameList(BuildContext context) {
-    return eventsNameList = [
+    return eventsNameList = AppResources.categoriesSelectedList;
+  }
+
+  List<String> getEventLocalizationsNameList(BuildContext context) {
+     return eventsNameListLocalizations = [
       AppLocalizations.of(context)!.category_all,
       AppLocalizations.of(context)!.category_sport,
       AppLocalizations.of(context)!.category_birthday,
@@ -79,6 +85,8 @@ class EventListProvider extends ChangeNotifier {
     }).toList();
     notifyListeners();
   }
+
+  // ====================== UPDATE IS FAVORITE==================================
 
   void updateIsFavorite(Event event, String uId) {
     FirebaseUtils.getEventsCollection(uId)

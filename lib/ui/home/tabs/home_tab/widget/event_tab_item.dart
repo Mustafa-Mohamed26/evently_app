@@ -8,6 +8,9 @@ class EventTabItem extends StatelessWidget {
   final TextStyle? selectedTextStyle;
   final TextStyle? unSelectedTextStyle;
   final Color? borderColor;
+  final IconData icon;
+  final Color iconColor;
+  final Color unSelectedIconColor;
   const EventTabItem({
     super.key,
     required this.isSelected,
@@ -16,6 +19,9 @@ class EventTabItem extends StatelessWidget {
     required this.selectedTextStyle,
     required this.unSelectedTextStyle,
     this.borderColor,
+    required this.icon,
+    required this.iconColor,
+    required this.unSelectedIconColor
   });
 
   @override
@@ -36,9 +42,19 @@ class EventTabItem extends StatelessWidget {
         ),
         color: isSelected ? selectedBgColor : AppColors.transparentColor,
       ),
-      child: Text(
-        eventName,
-        style: isSelected ? selectedTextStyle : unSelectedTextStyle,
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: isSelected ? iconColor : unSelectedIconColor,
+                
+          ),
+          SizedBox(width: width * 0.01),
+          Text(
+            eventName,
+            style: isSelected ? selectedTextStyle : unSelectedTextStyle,
+          ),
+        ],
       ),
     );
   }

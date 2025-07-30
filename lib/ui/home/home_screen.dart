@@ -9,17 +9,20 @@ import 'package:evently_app/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // The index of the currently selected tab in the bottom navigation bar.
+  // It determines which tab is displayed in the body of the Scaffold.
   int selectedIndex = 0;
-
   List<Widget> tabs = [HomeTab(), MapTab(), LoveTab(), ProfileTab()];
 
+  // This method builds a BottomNavigationBarItem with the appropriate icon and label.
+  // It checks if the current index matches the selected index to determine
   BottomNavigationBarItem buildBottomNavigationBarItem({
     required String selectedIconName,
     required String unSelectedIconName,
@@ -39,27 +42,34 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
+      //The body of the Scaffold displays the currently selected tab based on the selectedIndex.
       body: tabs[selectedIndex],
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed(AppRoutes.addEventRouteName);
         },
         child: Icon(Icons.add, color: AppColors.whiteColor, size: 35),
       ),
+      // The FloatingActionButton is positioned at the center of the bottom navigation bar.
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // The BottomAppBar provides a container for the bottom navigation bar.
+      // It has a notch to accommodate the FloatingActionButton.
       bottomNavigationBar: BottomAppBar(
         padding: EdgeInsets.zero,
         color: Theme.of(context).primaryColor,
         shape: CircularNotchedRectangle(),
         notchMargin: 8,
         child: BottomNavigationBar(
-          //TODO:Search on the packages of bottomNaviagtionBar (animated bottom navigation)
-          //TODO:icons_plus package
+          // The BottomNavigationBar displays the tabs with icons and labels.
           currentIndex: selectedIndex,
+          // The currentIndex is set to the selectedIndex to highlight the active tab.
           onTap: (index) {
             selectedIndex = index;
             setState(() {});
           },
+          // The onTap callback updates the selectedIndex and rebuilds the widget.
           items: [
             buildBottomNavigationBarItem(
               index: 0,
