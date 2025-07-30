@@ -93,6 +93,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    // Custom text field for name input
+                    // This field includes validation to ensure the name is not empty
                     CustomTextField(
                       controller: nameController,
                       colorBorderSide: themeProvider.appTheme == ThemeMode.light
@@ -122,6 +124,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                     SizedBox(height: height * 0.02),
+                    // Custom text field for email input
+                    // This field includes validation to ensure the email is not empty and is in a valid format
                     CustomTextField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -160,6 +164,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                     SizedBox(height: height * 0.02),
+                    // Custom text field for password input
+                    // This field includes validation to ensure the password is not empty and has at least 6 characters
                     CustomTextField(
                       controller: passwordController,
                       keyboardType: TextInputType.visiblePassword,
@@ -212,6 +218,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                     SizedBox(height: height * 0.02),
+                    // Custom text field for re-entering password
+                    // This field includes validation to ensure the re-password matches the password and is not empty
                     CustomTextField(
                       controller: rePasswordController,
                       keyboardType: TextInputType.visiblePassword,
@@ -272,6 +280,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
 
                     SizedBox(height: height * 0.02),
+                    // Custom elevated button for registration
+                    // This button will trigger the registration process when pressed
                     CustomElevatedButton(
                       text: AppLocalizations.of(context)!.register_button,
                       backgroundColor: AppColors.primaryLight,
@@ -281,6 +291,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                     SizedBox(height: height * 0.02),
+                    // Row with text and button to navigate to login screen
+                    // This row allows users to switch to the login screen if they already have an account
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -305,6 +317,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                     ),
                     SizedBox(height: height * 0.02),
+                    // Custom switch for language
+                    // This switch allows users to change the app language between English and Arabic
                     CustomSwitch(
                       value: isEnglish,
                       onToggle: (val) {
@@ -327,6 +341,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  /// Function to handle user registration
+  /// This function validates the form inputs and attempts to create a user with email and password
   void register() async {
     if (formKey.currentState!.validate()) {
       // Show loading dialog while registering
