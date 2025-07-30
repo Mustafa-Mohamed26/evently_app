@@ -3,15 +3,15 @@ import 'package:evently_app/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  VoidCallback onPressed;
-  String text;
-  Color? backgroundColor;
-  Color? borderColorSide;
-  bool hasIcon;
-  Widget? iconWidget;
-  TextStyle? textStyle;
-  MainAxisAlignment? mainAxisAlignment;
-  CustomElevatedButton({
+  final VoidCallback onPressed;
+  final String text;
+  final Color? backgroundColor;
+  final Color? borderColorSide;
+  final bool hasIcon;
+  final Widget? iconWidget;
+  final TextStyle? textStyle;
+  final MainAxisAlignment? mainAxisAlignment;
+  const CustomElevatedButton({
     super.key,
     required this.onPressed,
     required this.text,

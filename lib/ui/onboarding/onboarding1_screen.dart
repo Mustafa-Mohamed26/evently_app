@@ -7,7 +7,6 @@ import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_routes.dart';
 import 'package:evently_app/utils/app_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:colorful_iconify_flutter/icons/circle_flags.dart';
 import 'package:iconify_flutter/icons/typcn.dart';

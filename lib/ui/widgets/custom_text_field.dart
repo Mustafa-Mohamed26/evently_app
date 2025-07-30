@@ -5,23 +5,23 @@ import 'package:flutter/material.dart';
 typedef OnValidate = String? Function(String?);
 
 class CustomTextField extends StatelessWidget {
-  Color colorBorderSide;
-  Color? cursorColor;
-  String? hintText;
-  TextStyle? hintStyle;
-  String? labelText;
-  TextStyle? labelStyle;
-  Widget? prefixIcon;
-  Widget? suffixIcon;
-  TextEditingController controller;
-  OnValidate? validate;
-  TextInputType? keyboardType;
-  bool obscureText;
-  String ? obscuringCharacter;
-  int? maxLines;
-  TextStyle? style;
+  final Color colorBorderSide;
+  final Color? cursorColor;
+  final String? hintText;
+  final TextStyle? hintStyle;
+  final String? labelText;
+  final TextStyle? labelStyle;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final TextEditingController controller;
+  final OnValidate? validate;
+  final TextInputType? keyboardType;
+  final bool obscureText;
+  final String? obscuringCharacter;
+  final int? maxLines;
+  final TextStyle? style;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
     this.colorBorderSide = AppColors.greyColor,
     this.cursorColor,
