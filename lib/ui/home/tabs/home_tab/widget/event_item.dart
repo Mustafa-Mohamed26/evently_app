@@ -9,9 +9,9 @@ import 'package:provider/provider.dart';
 
 typedef OnPressed = void Function();
 class EventItem extends StatelessWidget {
-  Event event;
-  OnPressed onPressed;
-  EventItem({super.key, required this.event, required this.onPressed});
+  final Event event;
+  final OnPressed onPressed;
+  const EventItem({super.key, required this.event, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

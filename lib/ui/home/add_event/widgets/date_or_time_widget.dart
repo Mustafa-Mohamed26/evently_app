@@ -2,11 +2,11 @@ import 'package:evently_app/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class DateOrTimeWidget extends StatelessWidget {
-  IconData iconDateOrTime;
-  String eventDateOrTime;
-  String chooseDateOrTime;
-  VoidCallback onChooseDateOrTimeClick;
-  DateOrTimeWidget({
+  final IconData iconDateOrTime;
+  final String eventDateOrTime;
+  final String chooseDateOrTime;
+  final VoidCallback onChooseDateOrTimeClick;
+  const DateOrTimeWidget({
     super.key,
     required this.iconDateOrTime,
     required this.eventDateOrTime,
@@ -17,7 +17,6 @@ class DateOrTimeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
     return Row(
       children: [
         Icon(iconDateOrTime, color: Theme.of(context).dividerColor),

@@ -9,6 +9,7 @@ import 'package:evently_app/ui/widgets/custom_elevated_button.dart';
 import 'package:evently_app/ui/widgets/custom_text_field.dart';
 import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
+import 'package:evently_app/utils/app_resources.dart';
 import 'package:evently_app/utils/app_styles.dart';
 import 'package:evently_app/utils/firebase_utils.dart';
 import 'package:evently_app/utils/toast_utils.dart';
@@ -17,7 +18,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class AddEvent extends StatefulWidget {
-  AddEvent({super.key});
+  const AddEvent({super.key});
 
   @override
   State<AddEvent> createState() => _AddEventState();
@@ -64,26 +65,29 @@ class _AddEventState extends State<AddEvent> {
     ];
 
     //TODO: handle the events Images in dark mode
+    
+    List iconsList = [
+    Icons.all_inclusive_outlined,
+    Icons.sports_soccer_outlined,
+    Icons.cake_outlined,
+    Icons.business_center_outlined,
+    Icons.videogame_asset_outlined,
+    Icons.theater_comedy_outlined,
+    Icons.book_outlined,
+    Icons.image_outlined,
+    Icons.beach_access_outlined,
+    Icons.restaurant_menu_outlined
+  ];
 
-    Map<String, String> events = {
-      AppLocalizations.of(context)!.category_sport: AppAssets.sportImage,
-      AppLocalizations.of(context)!.category_birthday: AppAssets.birthdayImage,
-      AppLocalizations.of(context)!.category_meeting: AppAssets.meetingImage,
-      AppLocalizations.of(context)!.category_gaming: AppAssets.gamingImage,
-      AppLocalizations.of(context)!.category_workshop: AppAssets.workshopImage,
-      AppLocalizations.of(context)!.category_bookclub: AppAssets.bookClubImage,
-      AppLocalizations.of(context)!.category_exhibition:
-          AppAssets.exhibitionImage,
-      AppLocalizations.of(context)!.category_holiday: AppAssets.holidayImage,
-      AppLocalizations.of(context)!.category_eating: AppAssets.eatingImage,
-    };
+    
 
     selectedEventImage = eventsImageList[selectedIndex];
-    selectedEventName = eventsNameList[selectedIndex];
+    //selectedEventName = eventsNameList[selectedIndex];
+    selectedEventName = AppResources.categoriesSelectedList[selectedIndex + 1];
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    var ThemeProvider = Provider.of<AppThemeProvider>(context);
+    var themeProvider = Provider.of<AppThemeProvider>(context);
     eventListProvider = Provider.of<EventListProvider>(context);
 
     //TODO: handle the ui of the date and time picker in dark mode and light mode
@@ -186,6 +190,9 @@ class _AddEventState extends State<AddEvent> {
                         setState(() {});
                       },
                       child: EventTabItem(
+                        icon: iconsList[index],
+                        iconColor: AppColors.whiteColor,
+                        unSelectedIconColor: AppColors.primaryLight,
                         borderColor: AppColors.primaryLight,
                         unSelectedTextStyle: Theme.of(
                           context,
@@ -224,7 +231,7 @@ class _AddEventState extends State<AddEvent> {
                         }
                         return null;
                       },
-                      colorBorderSide: ThemeProvider.isDarkMode()
+                      colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,
 
@@ -250,7 +257,7 @@ class _AddEventState extends State<AddEvent> {
                         }
                         return null;
                       },
-                      colorBorderSide: ThemeProvider.isDarkMode()
+                      colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,
                       hintStyle: Theme.of(context).textTheme.titleMedium,

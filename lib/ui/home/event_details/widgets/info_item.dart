@@ -3,11 +3,11 @@ import 'package:evently_app/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class InfoItem extends StatelessWidget {
-  IconData icon;
-  String title;
-  String? subTitle;
-  bool subTitleVisible = true;
-  InfoItem({super.key, required this.icon, required this.title, this.subTitle, this.subTitleVisible = true});
+  final IconData icon;
+  final String title;
+  final String? subTitle;
+  final bool subTitleVisible;
+  const InfoItem({super.key, required this.icon, required this.title, this.subTitle, this.subTitleVisible = true});
 
   @override
   Widget build(BuildContext context) {

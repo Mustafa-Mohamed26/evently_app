@@ -1,7 +1,6 @@
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/app_language_provider.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
-import 'package:evently_app/providers/event_list_provider.dart';
 import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui/home/tabs/profile/language/language_bottom_sheet.dart';
 import 'package:evently_app/ui/home/tabs/profile/theme/theme_bottom_sheet.dart';
@@ -43,7 +42,6 @@ class _ProfileTabState extends State<ProfileTab> {
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
     var userProvider = Provider.of<UserProvider>(context);
-    var eventListProvider = Provider.of<EventListProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryLight,

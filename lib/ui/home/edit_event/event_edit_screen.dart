@@ -148,6 +148,20 @@ class _EventEditScreenState extends State<EventEditScreen> {
       AppAssets.eatingImage,
     ];
 
+    List iconsList = [
+    Icons.all_inclusive_outlined,
+    Icons.sports_soccer_outlined,
+    Icons.cake_outlined,
+    Icons.business_center_outlined,
+    Icons.videogame_asset_outlined,
+    Icons.theater_comedy_outlined,
+    Icons.book_outlined,
+    Icons.image_outlined,
+    Icons.beach_access_outlined,
+    Icons.restaurant_menu_outlined
+  ];
+
+
     if (!isInitialized && event != null) {
       titleController.text = event.title;
       descriptionController.text = event.description;
@@ -207,6 +221,9 @@ class _EventEditScreenState extends State<EventEditScreen> {
                         setState(() {});
                       },
                       child: EventTabItem(
+                        icon: iconsList[index],
+                        iconColor: AppColors.whiteColor,
+                        unSelectedIconColor: AppColors.primaryLight,
                         borderColor: AppColors.primaryLight,
                         unSelectedTextStyle: Theme.of(
                           context,
