@@ -82,6 +82,53 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_google => 'Login With Google';
 
   @override
+  String get login_empty_email => 'Please Enter Your Email';
+
+  @override
+  String get login_valid_email => 'Please Enter Valid Email';
+
+  @override
+  String get login_empty_password => 'Please Enter Your Password';
+
+  @override
+  String get login_6_characters => 'Password must be at least 6 characters';
+
+  @override
+  String get loading_login => 'Loading...';
+
+  @override
+  String get loading_google => 'Signing in with Google...';
+
+  @override
+  String get login_success => 'Login success';
+
+  @override
+  String get login_success_title => 'Success';
+
+  @override
+  String get login_success_action => 'OK';
+
+  @override
+  String get google_login_success => 'Google login successful';
+
+  @override
+  String get google_login_cancelled =>
+      'Google sign-in was cancelled or failed.';
+
+  @override
+  String get error_title => 'Error';
+
+  @override
+  String get error_invalid_credential =>
+      'The supplied auth credential is incorrect, malformed or has expired.';
+
+  @override
+  String get error_no_internet => 'No internet connection';
+
+  @override
+  String get error_firebase => 'Firebase error occurred';
+
+  @override
   String get register_Title => 'Register';
 
   @override
@@ -100,10 +147,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_button => 'Create Account';
 
   @override
-  String get register_have => 'Already Have Account';
+  String get register_have => 'Already Have Account ?';
 
   @override
   String get register_login => 'Login';
+
+  @override
+  String get register_empty_name => 'Please enter your name';
+
+  @override
+  String get register_empty_repassword => 'Please enter your password again';
+
+  @override
+  String get register_password_not_match => 'Passwords do not match';
+
+  @override
+  String get register_loading => 'Loading...';
+
+  @override
+  String get register_success => 'Registration success';
+
+  @override
+  String get register_success_title => 'Success';
+
+  @override
+  String get register_success_ok => 'OK';
+
+  @override
+  String get register_email_exists =>
+      'The account already exists for that email. Please login';
+
+  @override
+  String get register_error_title => 'Error';
+
+  @override
+  String get register_no_internet => 'No internet connection';
+
+  @override
+  String get register_weak_password => 'The password provided is too weak.';
 
   @override
   String get forgetPassword_title => 'Forget Password';

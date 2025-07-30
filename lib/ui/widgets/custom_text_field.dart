@@ -19,6 +19,8 @@ class CustomTextField extends StatelessWidget {
   bool obscureText;
   String ? obscuringCharacter;
   int? maxLines;
+  TextStyle? style;
+
   CustomTextField({
     super.key,
     this.colorBorderSide = AppColors.greyColor,
@@ -35,6 +37,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.obscuringCharacter,
     this.maxLines,
+    this.style
   });
 
   @override
@@ -56,6 +59,7 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         errorStyle: AppStyles.medium16Gray.copyWith(color: AppColors.redColor),
       ),
+      style: style,
       cursorColor: cursorColor,
       controller: controller,
       validator: validate,

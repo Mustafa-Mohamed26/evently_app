@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:evently_app/providers/app_language_provider.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
 
 class Onboarding2Screen extends StatefulWidget {
@@ -32,8 +31,10 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
   // It saves a preference indicating that the user has seen the onboarding screen
   Future<void> _completeOnboarding(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('seenOnboarding', true); // ✅ هذا أهم سطر
-  Navigator.pushReplacementNamed(context, AppRoutes.homeRouteName);
+  await prefs.setBool('seenOnboarding', true);
+  if (context.mounted) {
+    Navigator.pushReplacementNamed(context, AppRoutes.loginRouteName);
+  }
 }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/app_language_provider.dart';
 import 'package:evently_app/providers/app_theme_provider.dart';
-import 'package:evently_app/ui/onboarding/widgets/custom_switch.dart';
+import 'package:evently_app/ui/widgets/custom_switch.dart';
 import 'package:evently_app/utils/app_assets.dart';
 import 'package:evently_app/utils/app_colors.dart';
 import 'package:evently_app/utils/app_routes.dart';
@@ -77,8 +77,8 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
                       languageProvider.changeLanguage('ar');
                     }
                   },
-                  activeIcon: Iconify(CircleFlags.eg),
-                  inactiveIcon: Iconify(CircleFlags.lr),
+                  activeIcon: Iconify(CircleFlags.lr),
+                  inactiveIcon: Iconify(CircleFlags.eg),
                 ),
               ],
             ),
@@ -101,11 +101,11 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
                     }
                   },
                   activeIcon: Iconify(
-                    Typcn.adjust_contrast,
+                    Typcn.adjust_brightness,
                     color: AppColors.primaryLight,
                   ),
                   inactiveIcon: Iconify(
-                    Typcn.adjust_brightness,
+                    Typcn.adjust_contrast,
                     color: AppColors.primaryLight,
                   ),
                 ),

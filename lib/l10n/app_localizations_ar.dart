@@ -82,6 +82,54 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login_google => 'تسجيل الدخول باستخدام Google';
 
   @override
+  String get login_empty_email => 'يرجى ادخال البريد الالكتروني';
+
+  @override
+  String get login_valid_email => 'يرجى ادخال بريد الكتروني صالح';
+
+  @override
+  String get login_empty_password => 'يرجى ادخال كلمة المرور';
+
+  @override
+  String get login_6_characters =>
+      'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل';
+
+  @override
+  String get loading_login => 'جارٍ تسجيل الدخول...';
+
+  @override
+  String get loading_google => 'جارٍ تسجيل الدخول عبر Google...';
+
+  @override
+  String get login_success => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get login_success_title => 'نجاح';
+
+  @override
+  String get login_success_action => 'موافق';
+
+  @override
+  String get google_login_success => 'تم تسجيل الدخول عبر Google بنجاح';
+
+  @override
+  String get google_login_cancelled =>
+      'تم إلغاء تسجيل الدخول عبر Google أو فشل.';
+
+  @override
+  String get error_title => 'خطأ';
+
+  @override
+  String get error_invalid_credential =>
+      'بيانات الدخول غير صحيحة أو منتهية أو بها مشكلة.';
+
+  @override
+  String get error_no_internet => 'لا يوجد اتصال بالإنترنت';
+
+  @override
+  String get error_firebase => 'حدث خطأ في Firebase';
+
+  @override
   String get register_Title => 'إنشاء حساب';
 
   @override
@@ -104,6 +152,40 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get register_login => 'تسجيل الدخول';
+
+  @override
+  String get register_empty_name => 'يرجى إدخال اسمك';
+
+  @override
+  String get register_empty_repassword => 'يرجى إعادة إدخال كلمة المرور';
+
+  @override
+  String get register_password_not_match => 'كلمات المرور غير متطابقة';
+
+  @override
+  String get register_loading => 'جاري التسجيل...';
+
+  @override
+  String get register_success => 'تم التسجيل بنجاح';
+
+  @override
+  String get register_success_title => 'نجاح';
+
+  @override
+  String get register_success_ok => 'حسنًا';
+
+  @override
+  String get register_email_exists =>
+      'يوجد حساب بالفعل بهذا البريد الإلكتروني. الرجاء تسجيل الدخول';
+
+  @override
+  String get register_error_title => 'خطأ';
+
+  @override
+  String get register_no_internet => 'لا يوجد اتصال بالإنترنت';
+
+  @override
+  String get register_weak_password => 'كلمة المرور المقدمة ضعيفة جدًا.';
 
   @override
   String get forgetPassword_title => 'نسيت كلمة المرور';
