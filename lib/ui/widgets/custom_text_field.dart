@@ -3,6 +3,7 @@ import 'package:evently_app/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 typedef OnValidate = String? Function(String?);
+typedef OnChanged = void Function(String?);
 
 class CustomTextField extends StatelessWidget {
   final Color colorBorderSide;
@@ -20,6 +21,7 @@ class CustomTextField extends StatelessWidget {
   final String? obscuringCharacter;
   final int? maxLines;
   final TextStyle? style;
+  final OnChanged? onChanged;
 
   const CustomTextField({
     super.key,
@@ -37,7 +39,8 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.obscuringCharacter,
     this.maxLines,
-    this.style
+    this.style,
+    this.onChanged,
   });
 
   @override
@@ -63,6 +66,7 @@ class CustomTextField extends StatelessWidget {
       cursorColor: cursorColor,
       controller: controller,
       validator: validate,
+      onChanged: onChanged,
       keyboardType: keyboardType,
       obscureText: obscureText,
       obscuringCharacter: obscuringCharacter ?? ".",
