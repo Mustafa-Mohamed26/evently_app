@@ -270,4 +270,76 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get category_eating => 'تناول الطعام';
+
+  @override
+  String get create_event => 'إنشاء فعالية';
+
+  @override
+  String get title => 'العنوان';
+
+  @override
+  String get title_input => 'أدخل عنوان الحدث';
+
+  @override
+  String get title_error => 'يرجى ادخال عنوان للحدث';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get description_input => 'أدخل وصف الحدث';
+
+  @override
+  String get description_error => 'يرجى ادخال وصف للحدث';
+
+  @override
+  String get event_date => 'تاريخ الحدث';
+
+  @override
+  String get choose_date => 'اختر التاريخ';
+
+  @override
+  String get event_date_error => 'يرجى اختيار تاريخ للحدث';
+
+  @override
+  String get event_time => 'وقت الحدث';
+
+  @override
+  String get choose_time => 'اختر الوقت';
+
+  @override
+  String get event_time_error => 'يرجى اختيار وقت للحدث';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get location_input => 'أدخل موقع الحدث';
+
+  @override
+  String get add_event => 'أضف الحدث';
+
+  @override
+  String get event_details => 'تفاصيل الحدث';
+
+  @override
+  String get event_delete => 'تم حذف الحدث بنجاح';
+
+  @override
+  String get added_successfully => 'تم إضافة الحدث بنجاح';
+
+  @override
+  String get event_update => 'تم تحديث الحدث بنجاح';
+
+  @override
+  String get failed_add_event => 'فشل في اضافة الحدث';
+
+  @override
+  String get failed_update_event => 'فشل في تحديث الحدث';
+
+  @override
+  String get edit_event => 'تعديل الحدث';
+
+  @override
+  String get update_event => 'تحديث الحدث';
 }

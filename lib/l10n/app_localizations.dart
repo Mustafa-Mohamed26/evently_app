@@ -607,6 +607,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Eating'**
   String get category_eating;
+
+  /// No description provided for @create_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Event'**
+  String get create_event;
+
+  /// No description provided for @title.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get title;
+
+  /// No description provided for @title_input.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter event title'**
+  String get title_input;
+
+  /// No description provided for @title_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a title for the event'**
+  String get title_error;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @description_input.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter event description'**
+  String get description_input;
+
+  /// No description provided for @description_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a description for the event'**
+  String get description_error;
+
+  /// No description provided for @event_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Date'**
+  String get event_date;
+
+  /// No description provided for @choose_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Date'**
+  String get choose_date;
+
+  /// No description provided for @event_date_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a date for the event'**
+  String get event_date_error;
+
+  /// No description provided for @event_time.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Time'**
+  String get event_time;
+
+  /// No description provided for @choose_time.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Time'**
+  String get choose_time;
+
+  /// No description provided for @event_time_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a time for the event'**
+  String get event_time_error;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @location_input.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter event location'**
+  String get location_input;
+
+  /// No description provided for @add_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Event'**
+  String get add_event;
+
+  /// No description provided for @event_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Details'**
+  String get event_details;
+
+  /// No description provided for @event_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Event deleted successfully'**
+  String get event_delete;
+
+  /// No description provided for @added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Event added successfully'**
+  String get added_successfully;
+
+  /// No description provided for @event_update.
+  ///
+  /// In en, this message translates to:
+  /// **'Event updated successfully'**
+  String get event_update;
+
+  /// No description provided for @failed_add_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add event'**
+  String get failed_add_event;
+
+  /// No description provided for @failed_update_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update event'**
+  String get failed_update_event;
+
+  /// No description provided for @edit_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Event'**
+  String get edit_event;
+
+  /// No description provided for @update_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Event'**
+  String get update_event;
 }
 
 class _AppLocalizationsDelegate

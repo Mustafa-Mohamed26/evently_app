@@ -96,5 +96,33 @@
   "category_bookclub": "Book Club",
   "category_exhibition": "Exhibition",
   "category_holiday": "Holiday",
-  "category_eating": "Eating"
+  "category_eating": "Eating",
+
+  "create_event":"Create Event",
+  "title": "Title",
+  "title_input": "Enter event title",
+  "title_error": "Please enter a title for the event",
+  "description": "Description",
+  "description_input": "Enter event description",
+  "description_error": "Please enter a description for the event",
+  "event_date": "Event Date",
+  "choose_date": "Choose Date",
+  "event_date_error": "Please select a date for the event",
+  "event_time": "Event Time",
+  "choose_time": "Choose Time",
+  "event_time_error": "Please select a time for the event",
+  "location": "Location",
+  "location_input": "Enter event location",
+  "add_event": "Add Event",
+
+  "event_details":"Event Details",
+  "event_delete": "Event deleted successfully",
+
+  "added_successfully": "Event added successfully",
+  "event_update": "Event updated successfully",
+  "failed_add_event": "Failed to add event",
+  "failed_update_event": "Failed to update event",
+
+  "edit_event" : "Edit Event",
+  "update_event" : "Update Event"
 }

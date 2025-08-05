@@ -52,7 +52,7 @@ class AppTheme {
     dividerColor: AppColors.whiteColor,
 
     appBarTheme: AppBarTheme(
-      iconTheme: IconThemeData(color: AppColors.primaryDark),
+      iconTheme: IconThemeData(color: AppColors.primaryLight),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparentColor,

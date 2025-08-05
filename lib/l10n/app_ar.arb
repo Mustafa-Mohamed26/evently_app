@@ -96,6 +96,34 @@
   "category_bookclub": "نادي الكتاب",
   "category_exhibition": "معرض",
   "category_holiday": "عطلة",
-  "category_eating": "تناول الطعام"
+  "category_eating": "تناول الطعام",
+
+  "create_event": "إنشاء فعالية",
+  "title": "العنوان",
+  "title_input": "أدخل عنوان الحدث",
+  "title_error": "يرجى ادخال عنوان للحدث",
+  "description": "الوصف",
+  "description_input": "أدخل وصف الحدث",
+  "description_error": "يرجى ادخال وصف للحدث",
+  "event_date": "تاريخ الحدث",
+  "choose_date": "اختر التاريخ",
+  "event_date_error": "يرجى اختيار تاريخ للحدث",
+  "event_time": "وقت الحدث",
+  "choose_time": "اختر الوقت",
+  "event_time_error": "يرجى اختيار وقت للحدث",
+  "location": "الموقع",
+  "location_input": "أدخل موقع الحدث",
+  "add_event": "أضف الحدث",
+
+  "event_details": "تفاصيل الحدث",
+  "event_delete" : "تم حذف الحدث بنجاح",
+
+  "added_successfully": "تم إضافة الحدث بنجاح",
+  "event_update": "تم تحديث الحدث بنجاح",
+  "failed_add_event": "فشل في اضافة الحدث",
+  "failed_update_event": "فشل في تحديث الحدث",
+
+  "edit_event" : "تعديل الحدث",
+  "update_event" : "تحديث الحدث"
   
 }

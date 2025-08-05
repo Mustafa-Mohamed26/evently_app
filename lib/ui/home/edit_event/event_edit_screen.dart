@@ -23,19 +23,20 @@ class EventEditScreen extends StatefulWidget {
 }
 
 class _EventEditScreenState extends State<EventEditScreen> {
-  int selectedIndex = 0;
-  String selectedEventImage = '';
-  String selectedEventName = '';
+  var formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
   DateTime? selectedDate;
   String formateDate = '';
   TimeOfDay? selectedTime;
   String formateTime = '';
+  String selectedEventImage = '';
+  String selectedEventName = '';
+  int selectedIndex = 0;
   bool isSubmitted = false;
   bool isInitialized = false;
 
+  // Initialize the controllers and variables
   void chooseDate() async {
     var chooseDate = await showDatePicker(
       context: context,
@@ -51,6 +52,7 @@ class _EventEditScreenState extends State<EventEditScreen> {
     }
   }
 
+  // Function to choose time
   void chooseTime() async {
     var chooseTime = await showTimePicker(
       context: context,
@@ -64,6 +66,7 @@ class _EventEditScreenState extends State<EventEditScreen> {
     }
   }
 
+  // Function to update the event
   void updateEvent() {
     isSubmitted = true;
     setState(() {});
@@ -97,11 +100,12 @@ class _EventEditScreenState extends State<EventEditScreen> {
         eventDataTime: updatedDateTime,
         eventTime: formateTime,
       );
-
+      // Add the event to Firestore and update the event list
+      // It uses the UserProvider to get the current user ID
       FirebaseUtils.updateEventInFirestore(updatedEvent, userId)
           .then((value) {
             ToastUtils.toastMsg(
-              msg: "Event updated Successfully",
+              msg: AppLocalizations.of(context)!.event_update,
               backGroundColor: AppColors.primaryLight,
               textColor: AppColors.whiteColor,
             );
@@ -112,7 +116,7 @@ class _EventEditScreenState extends State<EventEditScreen> {
           })
           .catchError((error) {
             ToastUtils.toastMsg(
-              msg: "Failed to update event",
+              msg: AppLocalizations.of(context)!.failed_update_event,
               backGroundColor: AppColors.redColor,
               textColor: AppColors.whiteColor,
             );
@@ -122,8 +126,11 @@ class _EventEditScreenState extends State<EventEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Access the EventListProvider to manage events and the AppThemeProvider for theme management
     final args = ModalRoute.of(context)!.settings.arguments as Map;
     final event = args['event'];
+
+    // Initialize the controllers and variables
     List<String> eventsNameList = [
       AppLocalizations.of(context)!.category_sport,
       AppLocalizations.of(context)!.category_birthday,
@@ -136,6 +143,7 @@ class _EventEditScreenState extends State<EventEditScreen> {
       AppLocalizations.of(context)!.category_eating,
     ];
 
+    // List of event images corresponding to the event categories
     List<String> eventsImageList = [
       AppAssets.sportImage,
       AppAssets.birthdayImage,
@@ -148,20 +156,21 @@ class _EventEditScreenState extends State<EventEditScreen> {
       AppAssets.eatingImage,
     ];
 
+    // List of icons corresponding to the event categories
     List iconsList = [
-    Icons.all_inclusive_outlined,
-    Icons.sports_soccer_outlined,
-    Icons.cake_outlined,
-    Icons.business_center_outlined,
-    Icons.videogame_asset_outlined,
-    Icons.theater_comedy_outlined,
-    Icons.book_outlined,
-    Icons.image_outlined,
-    Icons.beach_access_outlined,
-    Icons.restaurant_menu_outlined
-  ];
+      Icons.all_inclusive_outlined,
+      Icons.sports_soccer_outlined,
+      Icons.cake_outlined,
+      Icons.business_center_outlined,
+      Icons.videogame_asset_outlined,
+      Icons.theater_comedy_outlined,
+      Icons.book_outlined,
+      Icons.image_outlined,
+      Icons.beach_access_outlined,
+      Icons.restaurant_menu_outlined,
+    ];
 
-
+    // Initialize the controllers and variables
     if (!isInitialized && event != null) {
       titleController.text = event.title;
       descriptionController.text = event.description;
@@ -191,9 +200,9 @@ class _EventEditScreenState extends State<EventEditScreen> {
         backgroundColor: AppColors.transparentColor,
         centerTitle: true,
         title: Text(
-          "Edit Event",
+          AppLocalizations.of(context)!.edit_event,
           style: AppStyles.medium20Primary,
-        ), // TODO: Localize
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.04),
@@ -201,6 +210,7 @@ class _EventEditScreenState extends State<EventEditScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Event image
               Container(
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
@@ -209,7 +219,8 @@ class _EventEditScreenState extends State<EventEditScreen> {
                 child: Image.asset(eventsImageList[selectedIndex]),
               ),
               SizedBox(height: height * 0.02),
-              //TODO: handle the color of the list view in dark mode
+
+              // Horizontal list of event categories with icons
               SizedBox(
                 height: height * 0.04,
                 child: ListView.separated(
@@ -222,16 +233,16 @@ class _EventEditScreenState extends State<EventEditScreen> {
                       },
                       child: EventTabItem(
                         icon: iconsList[index],
-                        iconColor: AppColors.whiteColor,
+                        iconColor: themeProvider.appTheme == ThemeMode.light
+                            ? AppColors.whiteColor
+                            : AppColors.primaryDark,
                         unSelectedIconColor: AppColors.primaryLight,
                         borderColor: AppColors.primaryLight,
-                        unSelectedTextStyle: Theme.of(
-                          context,
-                        ).textTheme.headlineMedium,
-
-                        selectedTextStyle: Theme.of(
-                          context,
-                        ).textTheme.headlineSmall,
+                        unSelectedTextStyle: AppStyles.medium16Primary,
+                        selectedTextStyle:
+                            themeProvider.appTheme == ThemeMode.light
+                            ? AppStyles.bold16White
+                            : AppStyles.bold16Black,
                         selectedBgColor: AppColors.primaryLight,
                         isSelected: selectedIndex == index,
                         eventName: eventsNameList[index],
@@ -245,23 +256,27 @@ class _EventEditScreenState extends State<EventEditScreen> {
                 ),
               ),
               SizedBox(height: height * 0.02),
+
+              // Form to add event details
               Form(
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    // Title field
                     Text(
-                      "Title",
+                      AppLocalizations.of(context)!.title,
                       style: Theme.of(context).textTheme.titleLarge,
-                    ), //TODO: Localization
+                    ),
                     SizedBox(height: height * 0.02),
                     CustomTextField(
                       validate: (text) {
                         if (text == null || text.trim().isEmpty) {
-                          return 'Please enter event title'; //TODO: Localization
+                          return AppLocalizations.of(context)!.title_error;
                         }
                         return null;
                       },
+                      style: Theme.of(context).textTheme.titleMedium,
                       colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,
@@ -273,53 +288,62 @@ class _EventEditScreenState extends State<EventEditScreen> {
                         color: Theme.of(context).dividerColor,
                         size: 30,
                       ),
-                      hintText: "Event Title", //TODO: Localization
+                      hintText: AppLocalizations.of(context)!.title_input,
                     ),
                     SizedBox(height: height * 0.02),
+
+                    // Description field
                     Text(
-                      "Description",
+                      AppLocalizations.of(context)!.description,
                       style: Theme.of(context).textTheme.titleLarge,
-                    ), //TODO: Localization
+                    ),
                     SizedBox(height: height * 0.01),
                     CustomTextField(
                       validate: (text) {
                         if (text == null || text.trim().isEmpty) {
-                          return 'Please enter event description'; //TODO: Localization
+                          return AppLocalizations.of(
+                            context,
+                          )!.description_error;
                         }
                         return null;
                       },
+                      style: Theme.of(context).textTheme.titleMedium,
                       colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,
                       hintStyle: Theme.of(context).textTheme.titleMedium,
                       controller: descriptionController,
                       maxLines: 4,
-                      hintText: "Event Description", //TODO: Localization
+                      hintText: AppLocalizations.of(context)!.description_input,
                     ),
+
                     SizedBox(height: height * 0.02),
-                    //TODO: add validation to the time and data
+
+                    // Date field
                     DateOrTimeWidget(
                       iconDateOrTime: Icons.calendar_month_outlined,
-                      eventDateOrTime: "Event Date", //TODO: Localization
+                      eventDateOrTime: AppLocalizations.of(context)!.event_date,
                       chooseDateOrTime: selectedDate == null
-                          ? "Choose Date"
-                          : formateDate, //'${selectedDate!.month}/${selectedDate!.day}/${selectedDate!.year}', //TODO: Localization
+                          ? AppLocalizations.of(context)!.choose_date
+                          : formateDate, //'${selectedDate!.month}/${selectedDate!.day}/${selectedDate!.year}',
                       onChooseDateOrTimeClick: chooseDate,
                     ),
                     Visibility(
                       visible: selectedDate == null && isSubmitted == true,
                       child: Text(
-                        "Please Choose Date",
+                        AppLocalizations.of(context)!.event_date_error,
                         style: AppStyles.medium16Black.copyWith(
                           color: AppColors.redColor,
                         ),
                       ),
                     ),
+
+                    // Time field
                     DateOrTimeWidget(
                       iconDateOrTime: Icons.timelapse_rounded,
-                      eventDateOrTime: "Event Time", //TODO: Localization
+                      eventDateOrTime: AppLocalizations.of(context)!.event_time,
                       chooseDateOrTime: selectedTime == null
-                          ? "Choose Time" //TODO: Localization
+                          ? AppLocalizations.of(context)!.choose_time
                           : formateTime,
                       onChooseDateOrTimeClick: chooseTime,
                     ),
@@ -327,17 +351,18 @@ class _EventEditScreenState extends State<EventEditScreen> {
                       visible: selectedTime == null && isSubmitted == true,
 
                       child: Text(
-                        "Please Choose Time",
+                        AppLocalizations.of(context)!.event_time_error,
                         style: AppStyles.medium16Black.copyWith(
                           color: AppColors.redColor,
                         ),
                       ),
                     ),
-                    SizedBox(height: height * 0.02),
+
+                    // Location field
                     Text(
-                      "Location",
+                      AppLocalizations.of(context)!.location,
                       style: Theme.of(context).textTheme.titleLarge,
-                    ), //TODO: Localization
+                    ),
                     SizedBox(height: height * 0.01),
                     Container(
                       padding: EdgeInsets.symmetric(
@@ -364,12 +389,14 @@ class _EventEditScreenState extends State<EventEditScreen> {
                             ),
                             child: Icon(
                               Icons.my_location,
-                              color: AppColors.whiteColor,
+                              color: themeProvider.isDarkMode()
+                                  ? AppColors.primaryDark
+                                  : AppColors.whiteColor,
                             ),
                           ),
                           SizedBox(width: width * 0.02),
                           Text(
-                            "Choose Event Location", //TODO: Localization
+                            AppLocalizations.of(context)!.location_input,
                             style: AppStyles.medium16Primary,
                           ),
                           Spacer(),
@@ -380,10 +407,12 @@ class _EventEditScreenState extends State<EventEditScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: height * 0.02),
+                    SizedBox(height: height * 0.01),
+
+                    // Add Event button
                     CustomElevatedButton(
                       onPressed: updateEvent,
-                      text: "Update Event", //TODO: Localization
+                      text: AppLocalizations.of(context)!.update_event,
                     ),
                   ],
                 ),
