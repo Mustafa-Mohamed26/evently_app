@@ -25,21 +25,24 @@ class AddEvent extends StatefulWidget {
 }
 
 class _AddEventState extends State<AddEvent> {
-  int selectedIndex = 0;
-  String selectedEventImage = '';
-  String selectedEventName = '';
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  DateTime? selectedDate;
-  String formateDate = '';
-  TimeOfDay? selectedTime;
-  String formateTime = '';
-  late EventListProvider eventListProvider;
-  bool isSubmitted = false;
+  // data controllers
+  TextEditingController titleController = TextEditingController(); // title
+  TextEditingController descriptionController =
+      TextEditingController(); // description
+  DateTime? selectedDate; // selected date
+  String formateDate = ''; // formatted date
+  TimeOfDay? selectedTime; // selected time
+  String formateTime = ''; // formatted time
+  String selectedEventImage = ''; // selected event image
+  String selectedEventName = ''; // selected event name
+  int selectedIndex = 0; // selected index for event category
+  late EventListProvider eventListProvider; // event list provider
+  bool isSubmitted = false; // flag to check if the form is submitted
 
   @override
   Widget build(BuildContext context) {
+    // List of event names and images for event category localization
     List<String> eventsNameList = [
       AppLocalizations.of(context)!.category_sport,
       AppLocalizations.of(context)!.category_birthday,
@@ -52,6 +55,7 @@ class _AddEventState extends State<AddEvent> {
       AppLocalizations.of(context)!.category_eating,
     ];
 
+    // List of event images corresponding to the event categories
     List<String> eventsImageList = [
       AppAssets.sportImage,
       AppAssets.birthdayImage,
@@ -64,34 +68,33 @@ class _AddEventState extends State<AddEvent> {
       AppAssets.eatingImage,
     ];
 
-    //TODO: handle the events Images in dark mode
-    
+    // List of icons corresponding to the event categories
     List iconsList = [
-    Icons.all_inclusive_outlined,
-    Icons.sports_soccer_outlined,
-    Icons.cake_outlined,
-    Icons.business_center_outlined,
-    Icons.videogame_asset_outlined,
-    Icons.theater_comedy_outlined,
-    Icons.book_outlined,
-    Icons.image_outlined,
-    Icons.beach_access_outlined,
-    Icons.restaurant_menu_outlined
-  ];
+      Icons.all_inclusive_outlined,
+      Icons.sports_soccer_outlined,
+      Icons.cake_outlined,
+      Icons.business_center_outlined,
+      Icons.videogame_asset_outlined,
+      Icons.theater_comedy_outlined,
+      Icons.book_outlined,
+      Icons.image_outlined,
+      Icons.beach_access_outlined,
+      Icons.restaurant_menu_outlined,
+    ];
 
-    
-
+    // Set the selected event image and name based on the selected index
     selectedEventImage = eventsImageList[selectedIndex];
     //selectedEventName = eventsNameList[selectedIndex];
     selectedEventName = AppResources.categoriesSelectedList[selectedIndex + 1];
 
+    // Get the height and width of the screen
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    // Get the theme provider and event list provider
     var themeProvider = Provider.of<AppThemeProvider>(context);
     eventListProvider = Provider.of<EventListProvider>(context);
 
-    //TODO: handle the ui of the date and time picker in dark mode and light mode
-    //TODO: handle the localization of the date and time picker in dark mode and light mode
+    // Function to choose date using date picker
     void chooseDate() async {
       var chooseDate = await showDatePicker(
         context: context,
@@ -107,6 +110,7 @@ class _AddEventState extends State<AddEvent> {
       }
     }
 
+    // Function to choose time using time picker
     void chooseTime() async {
       var chooseTime = await showTimePicker(
         context: context,
@@ -120,12 +124,15 @@ class _AddEventState extends State<AddEvent> {
       }
     }
 
+    // Function to add the event after validation
+    // It checks if the form is valid, date and time are selected, and then creates
     void addEvent() {
       isSubmitted = true;
       setState(() {});
       if (formKey.currentState!.validate() == true &&
           selectedDate != null &&
           selectedTime != null) {
+        // Create an event object with the provided data
         Event event = Event(
           title: titleController.text,
           description: descriptionController.text,
@@ -134,14 +141,21 @@ class _AddEventState extends State<AddEvent> {
           eventDataTime: selectedDate!,
           eventTime: formateDate,
         );
+
+        // Add the event to Firestore and update the event list
+        // It uses the UserProvider to get the current user ID
         var userProvider = Provider.of<UserProvider>(context, listen: false);
-        FirebaseUtils.addEventToFireStore(event, userProvider.currentUser!.id)
+        FirebaseUtils.addEventToFireStore(
+              event,
+              userProvider.currentUser!.id,
+            ) // add event to Firestore
             .then((value) {
               ToastUtils.toastMsg(
                 msg: "Event added Successfully",
                 backGroundColor: AppColors.primaryLight,
                 textColor: AppColors.whiteColor,
               );
+              // After adding the event, fetch all events for the current user
               eventListProvider.getAllEvents(userProvider.currentUser!.id);
               Navigator.pop(context);
             })
@@ -156,20 +170,24 @@ class _AddEventState extends State<AddEvent> {
     }
 
     return Scaffold(
+      // AppBar with a transparent background and centered title
       appBar: AppBar(
         backgroundColor: AppColors.transparentColor,
         centerTitle: true,
         title: Text(
-          "Create Event",
+          AppLocalizations.of(context)!.create_event,
           style: AppStyles.medium20Primary,
-        ), // TODO: Localize
+        ),
       ),
+
+      // Main body of the AddEvent screen
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.04),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Event image
               Container(
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
@@ -178,7 +196,8 @@ class _AddEventState extends State<AddEvent> {
                 child: Image.asset(eventsImageList[selectedIndex]),
               ),
               SizedBox(height: height * 0.02),
-              //TODO: handle the color of the list view in dark mode
+
+              // Horizontal list of event categories with icons
               SizedBox(
                 height: height * 0.04,
                 child: ListView.separated(
@@ -191,16 +210,16 @@ class _AddEventState extends State<AddEvent> {
                       },
                       child: EventTabItem(
                         icon: iconsList[index],
-                        iconColor: AppColors.whiteColor,
+                        iconColor: themeProvider.appTheme == ThemeMode.light
+                            ? AppColors.whiteColor
+                            : AppColors.primaryDark,
                         unSelectedIconColor: AppColors.primaryLight,
                         borderColor: AppColors.primaryLight,
-                        unSelectedTextStyle: Theme.of(
-                          context,
-                        ).textTheme.headlineMedium,
-
-                        selectedTextStyle: Theme.of(
-                          context,
-                        ).textTheme.headlineSmall,
+                        unSelectedTextStyle: AppStyles.medium16Primary,
+                        selectedTextStyle:
+                            themeProvider.appTheme == ThemeMode.light
+                            ? AppStyles.bold16White
+                            : AppStyles.bold16Black,
                         selectedBgColor: AppColors.primaryLight,
                         isSelected: selectedIndex == index,
                         eventName: eventsNameList[index],
@@ -214,20 +233,23 @@ class _AddEventState extends State<AddEvent> {
                 ),
               ),
               SizedBox(height: height * 0.02),
+
+              // Form to add event details
               Form(
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    // Title field
                     Text(
-                      "Title",
+                      AppLocalizations.of(context)!.title,
                       style: Theme.of(context).textTheme.titleLarge,
-                    ), //TODO: Localization
-                    SizedBox(height: height * 0.02),
+                    ), 
+                    SizedBox(height: height * 0.01),
                     CustomTextField(
                       validate: (text) {
                         if (text == null || text.trim().isEmpty) {
-                          return 'Please enter event title'; //TODO: Localization
+                          return AppLocalizations.of(context)!.title_error; 
                         }
                         return null;
                       },
@@ -242,18 +264,21 @@ class _AddEventState extends State<AddEvent> {
                         color: Theme.of(context).dividerColor,
                         size: 30,
                       ),
-                      hintText: "Event Title", //TODO: Localization
+                      hintText: AppLocalizations.of(context)!.title_input, 
                     ),
+
                     SizedBox(height: height * 0.02),
+
+                    // Description field
                     Text(
-                      "Description",
+                      AppLocalizations.of(context)!.description,
                       style: Theme.of(context).textTheme.titleLarge,
-                    ), //TODO: Localization
+                    ), 
                     SizedBox(height: height * 0.01),
                     CustomTextField(
                       validate: (text) {
                         if (text == null || text.trim().isEmpty) {
-                          return 'Please enter event description'; //TODO: Localization
+                          return AppLocalizations.of(context)!.description_error;
                         }
                         return null;
                       },
@@ -263,32 +288,36 @@ class _AddEventState extends State<AddEvent> {
                       hintStyle: Theme.of(context).textTheme.titleMedium,
                       controller: descriptionController,
                       maxLines: 4,
-                      hintText: "Event Description", //TODO: Localization
+                      hintText: AppLocalizations.of(context)!.description_input,
                     ),
-                    SizedBox(height: height * 0.02),
-                    //TODO: add validation to the time and data
+
+                    SizedBox(height: height * 0.01),
+
+                    // Date field
                     DateOrTimeWidget(
                       iconDateOrTime: Icons.calendar_month_outlined,
-                      eventDateOrTime: "Event Date", //TODO: Localization
+                      eventDateOrTime: AppLocalizations.of(context)!.event_date, 
                       chooseDateOrTime: selectedDate == null
-                          ? "Choose Date"
-                          : formateDate, //'${selectedDate!.month}/${selectedDate!.day}/${selectedDate!.year}', //TODO: Localization
+                          ? AppLocalizations.of(context)!.choose_date 
+                          : formateDate, //'${selectedDate!.month}/${selectedDate!.day}/${selectedDate!.year}',
                       onChooseDateOrTimeClick: chooseDate,
                     ),
                     Visibility(
                       visible: selectedDate == null && isSubmitted == true,
                       child: Text(
-                        "Please Choose Date",
+                        AppLocalizations.of(context)!.event_date_error,
                         style: AppStyles.medium16Black.copyWith(
                           color: AppColors.redColor,
                         ),
                       ),
                     ),
+
+                    // Time field
                     DateOrTimeWidget(
                       iconDateOrTime: Icons.timelapse_rounded,
-                      eventDateOrTime: "Event Time", //TODO: Localization
+                      eventDateOrTime: AppLocalizations.of(context)!.event_time,
                       chooseDateOrTime: selectedTime == null
-                          ? "Choose Time" //TODO: Localization
+                          ? AppLocalizations.of(context)!.choose_time
                           : formateTime,
                       onChooseDateOrTimeClick: chooseTime,
                     ),
@@ -296,17 +325,18 @@ class _AddEventState extends State<AddEvent> {
                       visible: selectedTime == null && isSubmitted == true,
 
                       child: Text(
-                        "Please Choose Time",
+                        AppLocalizations.of(context)!.event_time_error,
                         style: AppStyles.medium16Black.copyWith(
                           color: AppColors.redColor,
                         ),
                       ),
                     ),
-                    SizedBox(height: height * 0.02),
+
+                    // Location field
                     Text(
-                      "Location",
+                      AppLocalizations.of(context)!.location,
                       style: Theme.of(context).textTheme.titleLarge,
-                    ), //TODO: Localization
+                    ), 
                     SizedBox(height: height * 0.01),
                     Container(
                       padding: EdgeInsets.symmetric(
@@ -333,12 +363,14 @@ class _AddEventState extends State<AddEvent> {
                             ),
                             child: Icon(
                               Icons.my_location,
-                              color: AppColors.whiteColor,
+                              color: themeProvider.isDarkMode()
+                                  ? AppColors.primaryDark
+                                  : AppColors.whiteColor,
                             ),
                           ),
                           SizedBox(width: width * 0.02),
                           Text(
-                            "Choose Event Location", //TODO: Localization
+                            AppLocalizations.of(context)!.location_input,
                             style: AppStyles.medium16Primary,
                           ),
                           Spacer(),
@@ -349,12 +381,15 @@ class _AddEventState extends State<AddEvent> {
                         ],
                       ),
                     ),
-                    SizedBox(height: height * 0.02),
+
+                    SizedBox(height: height * 0.01),
+
+                    // Add Event button
                     CustomElevatedButton(
                       onPressed: () {
                         addEvent();
                       },
-                      text: "Add Event", //TODO: Localization
+                      text: AppLocalizations.of(context)!.add_event,
                     ),
                   ],
                 ),
