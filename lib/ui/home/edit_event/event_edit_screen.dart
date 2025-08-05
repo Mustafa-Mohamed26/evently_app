@@ -405,7 +405,9 @@ class _EventEditScreenState extends State<EventEditScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: height * 0.02),
+                    SizedBox(height: height * 0.01),
+
+                    // Add Event button
                     CustomElevatedButton(
                       onPressed: updateEvent,
                       text: AppLocalizations.of(context)!.update_event,
