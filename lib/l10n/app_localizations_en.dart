@@ -317,4 +317,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get add_event => 'Add Event';
+
+  @override
+  String get event_details => 'Event Details';
+
+  @override
+  String get event_delete => 'Event deleted successfully';
+
+  @override
+  String get added_successfully => 'Event added successfully';
+
+  @override
+  String get event_update => 'Event updated successfully';
+
+  @override
+  String get failed_add_event => 'Failed to add event';
+
+  @override
+  String get failed_update_event => 'Failed to update event';
+
+  @override
+  String get edit_event => 'Edit Event';
+
+  @override
+  String get update_event => 'Update Event';
 }

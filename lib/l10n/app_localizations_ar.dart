@@ -318,4 +318,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get add_event => 'أضف الحدث';
+
+  @override
+  String get event_details => 'تفاصيل الحدث';
+
+  @override
+  String get event_delete => 'تم حذف الحدث بنجاح';
+
+  @override
+  String get added_successfully => 'تم إضافة الحدث بنجاح';
+
+  @override
+  String get event_update => 'تم تحديث الحدث بنجاح';
+
+  @override
+  String get failed_add_event => 'فشل في اضافة الحدث';
+
+  @override
+  String get failed_update_event => 'فشل في تحديث الحدث';
+
+  @override
+  String get edit_event => 'تعديل الحدث';
+
+  @override
+  String get update_event => 'تحديث الحدث';
 }

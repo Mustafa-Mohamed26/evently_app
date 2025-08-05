@@ -125,4 +125,9 @@ class AppStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.greyColor,
   );
+  static TextStyle regular16White = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: AppColors.whiteColor,
+  );
 }

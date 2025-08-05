@@ -151,7 +151,7 @@ class _AddEventState extends State<AddEvent> {
             ) // add event to Firestore
             .then((value) {
               ToastUtils.toastMsg(
-                msg: "Event added Successfully",
+                msg: AppLocalizations.of(context)!.added_successfully,
                 backGroundColor: AppColors.primaryLight,
                 textColor: AppColors.whiteColor,
               );
@@ -161,7 +161,7 @@ class _AddEventState extends State<AddEvent> {
             })
             .catchError((error) {
               ToastUtils.toastMsg(
-                msg: "Failed to add event",
+                msg: AppLocalizations.of(context)!.failed_add_event,
                 backGroundColor: AppColors.redColor,
                 textColor: AppColors.whiteColor,
               );
@@ -244,7 +244,7 @@ class _AddEventState extends State<AddEvent> {
                     Text(
                       AppLocalizations.of(context)!.title,
                       style: Theme.of(context).textTheme.titleLarge,
-                    ), 
+                    ),
                     SizedBox(height: height * 0.01),
                     CustomTextField(
                       validate: (text) {
@@ -253,6 +253,7 @@ class _AddEventState extends State<AddEvent> {
                         }
                         return null;
                       },
+                      style: Theme.of(context).textTheme.titleMedium,
                       colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,
@@ -282,6 +283,7 @@ class _AddEventState extends State<AddEvent> {
                         }
                         return null;
                       },
+                      style: Theme.of(context).textTheme.titleMedium,
                       colorBorderSide: themeProvider.isDarkMode()
                           ? AppColors.primaryLight
                           : AppColors.greyColor,

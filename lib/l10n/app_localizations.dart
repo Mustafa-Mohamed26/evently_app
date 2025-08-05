@@ -703,6 +703,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add Event'**
   String get add_event;
+
+  /// No description provided for @event_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Details'**
+  String get event_details;
+
+  /// No description provided for @event_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Event deleted successfully'**
+  String get event_delete;
+
+  /// No description provided for @added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Event added successfully'**
+  String get added_successfully;
+
+  /// No description provided for @event_update.
+  ///
+  /// In en, this message translates to:
+  /// **'Event updated successfully'**
+  String get event_update;
+
+  /// No description provided for @failed_add_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add event'**
+  String get failed_add_event;
+
+  /// No description provided for @failed_update_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update event'**
+  String get failed_update_event;
+
+  /// No description provided for @edit_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Event'**
+  String get edit_event;
+
+  /// No description provided for @update_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Event'**
+  String get update_event;
 }
 
 class _AppLocalizationsDelegate

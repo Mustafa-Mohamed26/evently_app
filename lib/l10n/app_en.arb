@@ -113,5 +113,16 @@
   "event_time_error": "Please select a time for the event",
   "location": "Location",
   "location_input": "Enter event location",
-  "add_event": "Add Event"
+  "add_event": "Add Event",
+
+  "event_details":"Event Details",
+  "event_delete": "Event deleted successfully",
+
+  "added_successfully": "Event added successfully",
+  "event_update": "Event updated successfully",
+  "failed_add_event": "Failed to add event",
+  "failed_update_event": "Failed to update event",
+
+  "edit_event" : "Edit Event",
+  "update_event" : "Update Event"
 }
