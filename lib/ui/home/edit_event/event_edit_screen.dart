@@ -389,7 +389,9 @@ class _EventEditScreenState extends State<EventEditScreen> {
                             ),
                             child: Icon(
                               Icons.my_location,
-                              color: AppColors.whiteColor,
+                              color: themeProvider.isDarkMode()
+                                  ? AppColors.primaryDark
+                                  : AppColors.whiteColor,
                             ),
                           ),
                           SizedBox(width: width * 0.02),
